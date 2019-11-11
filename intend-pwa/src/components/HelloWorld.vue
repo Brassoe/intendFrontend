@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>32r2f2f2f22e</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -33,13 +33,16 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
     created(){
-      console.log("34r3y48fhuf3fgy4u3hfu4huf3yfu3");
+      axios
+      .get("http://localhost:8080/hello")
+      .then(response => (console.log(response.data)))
+      .catch(error => {
+        alert(error)
+      })
   },
 }
 </script>
