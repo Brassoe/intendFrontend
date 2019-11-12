@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import user from './user/index.js'
+import user from './user/userStore.js'
 import shared from './shared/index.js'
 
 Vue.use(Vuex)

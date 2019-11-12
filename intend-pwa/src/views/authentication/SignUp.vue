@@ -6,7 +6,7 @@
 import signUpForm from '@/components/authentication/signUpForm.vue'
 
 export default {
-  name: 'signup',
+  name: 'SignUp',
   components: {
     signUpForm
   }

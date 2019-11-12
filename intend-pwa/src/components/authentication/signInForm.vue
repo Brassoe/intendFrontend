@@ -1,12 +1,12 @@
 <template>
   <v-container grid-list-md  fill-height>
     <v-layout row>
-      <span class="heading">Tilmeld bruger</span>
+      <span class="heading">Log ind</span>
       <v-flex xs12 sm6 offset-sm3 >
         <v-card>
           <v-card-text>
             <v-container>
-              <form @submit.prevent="onSignUp">
+              <form @submit.prevent="onSignIn">
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
@@ -33,22 +33,9 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-text-field
-                      name="confirmPassword"
-                      label="Bekræft Password"
-                      id="confirmPassword"
-                      v-model="confirmPassword"
-                      type="password"
-                      :rules="[comparePasswords]">
-                    </v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
                     <v-btn
-                    v-if="comparePasswords == true"
                     type="submit">
-                    Opret bruger
+                    Log Ind
                     </v-btn>
                   </v-flex>
                 </v-layout>
@@ -63,28 +50,15 @@
 
 <script>
 export default {
-  name: "signUpForm",
+  name: "signInForm",
   data () {
     return {
       email: "",
-      password: "",
-      confirmPassword: ""
+      password: ""
     }
   },
   computed: {
-    comparePasswords () {
-      if(this.password == "" || this.confirmPassword == ""){
-        return ""
-      } else {
-        if(this.password !== this.confirmPassword) {
-          return 'Password er ikke ens'
-        } else {
-          return true
-        }
-      }
-
-    },
-    user () {
+      user () {
           return this.$store.getters.user
       }
   },
@@ -96,15 +70,10 @@ export default {
       }
   },
   methods: {
-    onSignUp() {
-      this.$store.dispatch("signUp", {email: this.email, password: this.password})
+    onSignIn() {
+      this.$store.dispatch("signIn", {email: this.email, password: this.password})
     }
   }
-
-
-
 }
 </script>
 
-<style lang="css" scoped>
-</style>

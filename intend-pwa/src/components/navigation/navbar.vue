@@ -2,34 +2,26 @@
   <nav>
     <v-bottom-navigation
     app
-    dark>
+    color="">
     <!-- Bottom Navigation if logged in -->
-    <v-list v-for="item in toolbarItemsLoggedIn" :key="item.title">
+    <v-list >
       <v-btn
+      v-for="item in toolbarItems" :key="item.title"
       class="bottom-navigation-btn"
       router
       :to="item.link">
         <span>{{item.title}}</span>
         <v-icon>{{item.icon}}</v-icon>
       </v-btn>
-    </v-list>
-    <v-btn class="bottom-navigation-btn" @click="drawer = !drawer">
-      <span>Menu</span>
-      <v-icon>mdi-menu</v-icon>
-    </v-btn>
-    <!-- Bottom navigation if NOT logged in -->
-    <v-list v-for="item in toolbarItemsNotLoggedIn" :key="item.title">
-      <v-btn
-      class="bottom-navigation-btn"
-      router
-      :to="item.link">
-        <span>{{item.title}}</span>
-        <v-icon>{{item.icon}}</v-icon>
+      <v-btn class="bottom-navigation-btn" @click="drawer = !drawer">
+        <span>Menu</span>
+        <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-list>
   </v-bottom-navigation>
 
   <v-navigation-drawer
+  v-if="userIsAuthenticated"
     absolute
     temporary
     v-model="drawer"
@@ -49,6 +41,21 @@
         </v-list-item>
       </template>
       <v-divider></v-divider>
+      <v-list dense>
+        <v-list-item
+          v-for="item in navigationDrawerItems"
+          :key="item.title"
+          @click=""
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
   </v-navigation-drawer>
 
 
@@ -62,17 +69,33 @@ export default {
   data() {
     return {
       drawer: false,
-      activeBtn: 1,
-      toolbarItemsLoggedIn: [
-        {icon: 'mdi-view-dashboard', title: 'Moduler', link: ''},
-        {icon: 'mdi-logout', title: 'Log Ud', link: ''},
-      ],
-      toolbarItemsNotLoggedIn: [
-        {icon: 'mdi-login', title: 'Log Ind', link: ''},
-        {icon: 'mdi-account-plus', title: 'Opret bruger', link: '/sign-up'},
-      ]
+      activeBtn: 1
     }
   },
+  computed: {
+    toolbarItems () {
+      let items = [
+        {icon: 'mdi-login', title: 'Log Ind', link: '/login'},
+        {icon: 'mdi-account-plus', title: 'Opret bruger', link: '/sign-up'},
+      ]
+      if(this.userIsAuthenticated) {
+        items = [
+          {icon: 'mdi-view-dashboard', title: 'Moduler', link: '/modules'},
+        ]
+      }
+      return items
+    },
+    navigationDrawerItems() {
+        let items = [
+          {icon: 'mdi-account', title: 'Konto', link: ''},
+          {icon: 'mdi-logout', title: 'Log Ud', link: ''},
+        ]
+      return items
+    },
+    userIsAuthenticated() {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    }
+  }
 }
 </script>
 

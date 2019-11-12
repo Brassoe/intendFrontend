@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import AuthGuard from './auth-guard'
+
 
 Vue.use(VueRouter)
 
@@ -11,22 +13,20 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/sign-up',
     name: 'sign up',
-    component: () => import(/* webpackChunkName: "about" */ '../views/authentication/signup.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/authentication/SignUp.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/authentication/login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/authentication/SignIn.vue')
+  },
+  {
+    path: '/modules',
+    name: 'modules',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Modules.vue'),
+    beforeEnter: AuthGuard
   },
 
 ]
