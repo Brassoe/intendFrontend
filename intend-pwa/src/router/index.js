@@ -25,9 +25,34 @@ const routes = [
   {
     path: '/modules',
     name: 'modules',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Modules.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/modules/Modules.vue'),
     beforeEnter: AuthGuard
   },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import(/* webpackChunkName: "about" */ '../views/dashboard/Dashboard.vue'),
+    beforeEnter: AuthGuard
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Profile.vue'),
+    beforeEnter: AuthGuard
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Account.vue'),
+    beforeEnter: AuthGuard
+  },
+  {
+    path: '/share',
+    name: 'share',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Share.vue'),
+    beforeEnter: AuthGuard
+  },
+  
 
 ]
 
