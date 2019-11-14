@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <InstalledModules class="moduleContainer"/>
     <ModulesCatalogue class="moduleContainer"/>
   </v-container>

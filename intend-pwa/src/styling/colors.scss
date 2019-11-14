@@ -1,1 +1,14 @@
+body {
+    background: $background-color;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.heading {
+  color: $heading-color;
+}
 
+.cards {
+    background: $cards-color;
+    background-size: cover;
+    background-attachment: fixed;
+}

@@ -1,7 +1,14 @@
 <template>
 <v-container>
-
      <span class="heading">Venner</span>
+     <v-btn 
+     fab 
+     small 
+     light 
+     style="margin: 5px 5px 10px 5px;"
+     @click="">
+        <v-icon>mdi-account-plus</v-icon>
+      </v-btn>
     <v-card
     class="mx-auto"
     max-width="500">

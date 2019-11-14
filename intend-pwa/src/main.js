@@ -6,8 +6,13 @@ import 'firebase/auth';
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
+import PageLoader from './components/shared/PageLoader'
 
 Vue.config.productionTip = false
+
+Vue.component('app-page-loader', PageLoader)
+
+
 
 new Vue({
   router,
@@ -30,5 +35,12 @@ new Vue({
         this.$store.dispatch('autoSignIn', user)
       }
     })
+    //Intercept router changes
+    
+    // router.beforeResolve((to, from, next) => {
+    //   next()
+    // }),
+    // router.afterEach((to, from) => {
+    // })
   }
 }).$mount('#app')

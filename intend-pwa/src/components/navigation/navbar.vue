@@ -1,23 +1,22 @@
 <template>
   <nav>
     <v-bottom-navigation
+    light
     app
-    dark>
+    shift>
     <!-- Bottom Navigation if logged in -->
-    <v-list >
+    <v-list>
       <v-btn
         v-for="item in toolbarItems" :key="item.title"
         class="bottom-navigation-btn"
         router
         :to="item.link">
-          <span>{{item.title}}</span>
           <v-icon>{{item.icon}}</v-icon>
       </v-btn>
       <v-btn 
         v-if="userIsAuthenticated"
         class="bottom-navigation-btn" 
         @click="drawer = !drawer">
-          <span>Menu</span>
           <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-list>
@@ -25,17 +24,13 @@
 
   <v-navigation-drawer
   v-if="userIsAuthenticated"
-  absolute
-  temporary
-  v-model="drawer"
   app
-  dark
-  class="indigo"
+  v-model="drawer"
+  light
   overlay-color="#000">
     <template v-slot:prepend>
       <v-list-item 
       two-line
-      dark
       router
       to="/profile">
         <v-list-item-avatar>
@@ -88,7 +83,7 @@ export default {
   data() {
     return {
       drawer: false,
-      activeBtn: 1
+      activeBtn: 1,
     }
   },
   computed: {
@@ -99,6 +94,7 @@ export default {
       ]
       if(this.userIsAuthenticated) {
         items = [
+          {icon: 'mdi-home', title: 'Dashboard', link: '/dashboard'},
           {icon: 'mdi-account-multiple', title: 'Venner', link: '/share'},
           {icon: 'mdi-view-module', title: 'Moduler', link: '/modules'},
         ]
@@ -107,7 +103,6 @@ export default {
     },
     navigationDrawerItems() {
         let items = [
-          {icon: 'mdi-home', title: 'Dashboard', link: '/dashboard'},
           {icon: 'mdi-account', title: 'Konto', link: '/account'},
           {icon: 'mdi-settings', title: 'Indstillinger', link: '/settings'}
 

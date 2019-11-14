@@ -1,44 +1,48 @@
 <template>
-    <v-card
-    class="mx-auto">
-        <h1>Modul Katalog</h1>
-        <v-container class="pa-1">
-        <v-item-group
-            v-model="selected"
-            multiple>
-                <v-row>
-                        <v-col
-                        v-for="(item, i) in items"
-                        :key="i"
-                        cols="6"
-                        md="3">
-                            <v-lazy
-                            v-model="isActive"
-                            :options="{
-                            threshold: 1
-                            }"
-                            transition="fade-transition">
-                                <v-item v-slot:default="{ active, toggle }">
-                                    <v-img
-                                    :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
-                                    height="150"
-                                    class="text-right pa-2"
-                                    @click="toggle">
-                                        <v-btn
-                                        icon
-                                        dark>
-                                            <v-icon>
-                                            {{ active ? 'mdi-heart' : 'mdi-heart-outline' }}
-                                            </v-icon>
-                                        </v-btn>
-                                    </v-img>
-                                </v-item>
-                            </v-lazy>
-                        </v-col>
-                </v-row>
-        </v-item-group>
-        </v-container>
-  </v-card>
+<v-container fluid>
+  <v-row>
+    <span class="sub-heading">Katalog</span>
+      <v-card
+      class="cards">
+          <v-container class="pa-1">
+          <v-item-group
+              v-model="selected"
+              multiple>
+                  <v-row>
+                          <v-col
+                          v-for="(item, i) in items"
+                          :key="i"
+                          cols="6"
+                          md="3">
+                              <v-lazy
+                              v-model="isActive"
+                              :options="{
+                              threshold: 1
+                              }"
+                              transition="fade-transition">
+                                  <v-item v-slot:default="{ active, toggle }">
+                                      <v-img
+                                      :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
+                                      height="150"
+                                      class="text-right pa-2"
+                                      @click="toggle">
+                                          <v-btn
+                                          icon
+                                          dark>
+                                              <v-icon>
+                                              {{ active ? 'mdi-heart' : 'mdi-heart-outline' }}
+                                              </v-icon>
+                                          </v-btn>
+                                      </v-img>
+                                  </v-item>
+                              </v-lazy>
+                          </v-col>
+                  </v-row>
+          </v-item-group>
+          </v-container>
+    </v-card>
+  </v-row>
+</v-container>
 </template>
 
 <script>

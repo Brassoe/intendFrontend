@@ -1,9 +1,9 @@
 body {
   font-family: $default-fontstyle;
-
 }
 
-.heading {
-  font-size: $heading-size;
-  color: $heading-color;
+.sub-heading {
+  font-size: $sub-heading-size;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
 }

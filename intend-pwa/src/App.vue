@@ -1,26 +1,29 @@
 <template>
+<v-container fluid>
   <div class="container">
     <Navbar/>
     <router-view/>
   </div>
+
+
+</v-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 import Navbar from './components/navigation/navbar'
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
     Navbar
   },
 
-  data: () => ({
-    //
-  }),
-};
+  data () {
+    return {
+    }
+  }
+}
 </script>
 
 <style lang="scss">
