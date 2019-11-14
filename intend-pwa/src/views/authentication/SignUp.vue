@@ -1,5 +1,7 @@
 <template>
-    <signUpForm/>
+  <v-container>
+      <signUpForm/>
+  </v-container>
 </template>
 
 <script>

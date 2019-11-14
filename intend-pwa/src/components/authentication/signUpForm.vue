@@ -1,7 +1,7 @@
 <template>
-  <v-container grid-list-md  fill-height>
+  <v-container>
     <v-layout row>
-      <span class="heading">Tilmeld bruger</span>
+      <span class="sub-heading">Tilmeld bruger</span>
       <v-flex xs12 sm6 offset-sm3 >
         <v-card>
           <v-card-text>

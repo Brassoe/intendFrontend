@@ -1,5 +1,6 @@
 <template>
-        <v-progress-circular
+    <v-progress-circular
+        class="pageLoader"
         indeterminate
         color="success"
         :width="7"
@@ -21,6 +22,8 @@ export default {
 <style lang="scss" scoped>
 
 .v-progress-circular {
-  margin: 1rem;
+  margin-top: 50%;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

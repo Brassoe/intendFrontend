@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
   },
   {
     path: '/sign-up',
@@ -53,9 +53,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/user/Share.vue'),
     beforeEnter: AuthGuard
   },
-  
 
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid>
-    <InstalledModules class="moduleContainer"/>
-    <ModulesCatalogue class="moduleContainer"/>
+  <v-container>
+      <InstalledModules class="moduleContainer"/>
+      <ModulesCatalogue class="moduleContainer"/>
   </v-container>
   
 

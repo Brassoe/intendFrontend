@@ -1,5 +1,7 @@
 <template>
-    <signInForm/>
+  <v-container>
+      <signInForm/>
+  </v-container>
 </template>
 
 <script>

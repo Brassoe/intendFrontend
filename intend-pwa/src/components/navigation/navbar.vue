@@ -2,8 +2,7 @@
   <nav>
     <v-bottom-navigation
     light
-    app
-    shift>
+    app>
     <!-- Bottom Navigation if logged in -->
     <v-list>
       <v-btn
@@ -27,6 +26,7 @@
   app
   v-model="drawer"
   light
+  temporary
   overlay-color="#000">
     <template v-slot:prepend>
       <v-list-item 

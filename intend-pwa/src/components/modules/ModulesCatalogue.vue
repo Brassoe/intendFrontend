@@ -1,9 +1,10 @@
 <template>
-<v-container fluid>
+<v-container>
   <v-row>
     <span class="sub-heading">Katalog</span>
       <v-card
-      class="cards">
+      class="cards"
+      min-width="100%">
           <v-container class="pa-1">
           <v-item-group
               v-model="selected"
@@ -23,7 +24,7 @@
                                   <v-item v-slot:default="{ active, toggle }">
                                       <v-img
                                       :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
-                                      height="150"
+                                      height="100"
                                       class="text-right pa-2"
                                       @click="toggle">
                                           <v-btn
@@ -98,6 +99,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
+    body .container {
+        margin: 0;
+        padding: 30px 6px 30px 6px;
+        max-width: 100%;
+    }
 </style>

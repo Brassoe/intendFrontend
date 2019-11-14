@@ -1,12 +1,8 @@
 <template>
-<v-container fluid>
-  <div class="container">
+  <v-app>
     <Navbar/>
     <router-view/>
-  </div>
-
-
-</v-container>
+  </v-app>
 </template>
 
 <script>
@@ -26,6 +22,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" defer>
   @import './styling/global.scss';
 </style>

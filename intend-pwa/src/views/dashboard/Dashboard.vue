@@ -1,6 +1,9 @@
 <template>
   <v-container>
-
+    <v-row>
+    <span class="sub-heading mt-6">Dashboard</span>
+    </v-row>
+    <MyModules/>
   </v-container>
   
 
@@ -8,12 +11,12 @@
 
 <script>
 // @ is an alias to /src
-
+import MyModules from '@/components/dashboard/MyModules.vue'
 
 export default {
   name: 'Dashboard',
   components: {
-
+    MyModules
   }
 }
 </script>
