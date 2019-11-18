@@ -1,23 +1,27 @@
 <template>
-    <v-container>
-        <v-row class="text-xs-center">
-            <span class="body-text">Mine moduler</span>
-        </v-row>
-        <app-page-loader v-if="isLoading"/>
-        <v-slide-group v-else multiple>
-        <v-slide-item
-            v-for="n in 25"
-            :key="n">
-                <v-card
-                style="margin: 0px 5px 0px 5px"
-                height="100"
-                width="100"
-                img="https://picsum.photos/200/300"
-                @click="">
-                </v-card>
-        </v-slide-item>
-        </v-slide-group>
-    </v-container>
+    <v-layout>
+        <v-flex xs12 md4 v-if="isLoading">
+            <app-page-loader/>
+        </v-flex>
+        <v-flex xs12 md4 v-else>
+                <v-slide-group
+                class="moduleSlider"
+                multiple>
+                    <v-slide-item
+                        v-for="n in 25"
+                        :key="n">
+                            <v-card
+                            class="mx-1"
+                            height="100"
+                            width="100"
+                            img="https://picsum.photos/200/300"
+                            click="">
+                            </v-card>
+                    </v-slide-item>
+                </v-slide-group>
+        </v-flex>
+
+    </v-layout>
 </template>
 
 <script>
@@ -43,5 +47,8 @@ export default {
         margin: 0;
         padding: 10px 6px 10px 6px;
         min-width: 100%;
+    }
+    .moduleSlider {
+        margin-bottom: 20px;
     }
 </style>

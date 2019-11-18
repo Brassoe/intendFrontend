@@ -1,7 +1,7 @@
 <template>
 <v-container>
     <v-row class="text-xs-center">
-        <span class="sub-heading" >Intends</span>
+        <span class="sub-heading" >Dine</span>
         <v-card 
         class="cards"
         min-width="100%">
@@ -52,20 +52,6 @@ export default {
     data () {
         return {
             isActive: false,
-            items: [
-                {
-                src: 'backgrounds/bg.jpg',
-                },
-                {
-                src: 'backgrounds/md.jpg',
-                },
-                {
-                src: 'backgrounds/bg-2.jpg',
-                },
-                {
-                src: 'backgrounds/md2.jpg',
-                },
-            ],
       selected: [],
         }
     },

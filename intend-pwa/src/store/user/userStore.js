@@ -51,6 +51,9 @@ export default {
     autoSignIn({commit}, payload) {
       commit('setUser', {id: payload.uid})
     },
+    getUserInfo({commit}, payload) {
+
+    },
     logout({commit}){
       firebase.auth().signOut()
       commit('setUser', null)

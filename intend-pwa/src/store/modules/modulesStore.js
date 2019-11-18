@@ -2,11 +2,12 @@ import axios from "axios"
 
 export default {
     state: {
-      installedModules: null
+      modulesCatalogue: [],
+      installedModules: []
     },
     mutations: {
-      setInstalledModules(state, payload) {
-        state.installedModules = payload
+      setModulesCatalogue(state, payload) {
+        state.modulesCatalogue = payload
       }
     },
     actions:{
@@ -16,8 +17,8 @@ export default {
                 .get('http://localhost:8080/modules/')
                 .then(response => {
                     response = response.data;
-                    commit('setInstalledModules', response)
-                      commit('setLoading', false)
+                    commit('setModulesCatalogue', response)
+                    commit('setLoading', false)
                 })
                 .catch(error => {
                   console.log(error)
@@ -26,6 +27,7 @@ export default {
       }
     },
     getters: {
+      moduleCatalogue: state => state.modulesCatalogue,
       installedModules: state => state.installedModules
     }
   }

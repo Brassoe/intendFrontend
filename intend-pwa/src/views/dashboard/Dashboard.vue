@@ -1,11 +1,10 @@
 <template>
-  <v-container>
-    <v-row>
-    <span class="sub-heading mt-6">Dashboard</span>
-    </v-row>
-    <MyModules/>
-  </v-container>
-  
+<v-container fill-height>
+    <v-layout row wrap align-content-end>
+        <MyModules/>
+    </v-layout>
+
+</v-container>
 
 </template>
 

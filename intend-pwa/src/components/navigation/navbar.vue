@@ -1,22 +1,21 @@
 <template>
   <nav>
     <v-bottom-navigation
-    light
     app>
     <!-- Bottom Navigation if logged in -->
-    <v-list>
+    <v-list class="mt-1">
       <v-btn
         v-for="item in toolbarItems" :key="item.title"
         class="bottom-navigation-btn"
         router
         :to="item.link">
-          <v-icon>{{item.icon}}</v-icon>
+          <v-icon color="#10ac84">{{item.icon}}</v-icon>
       </v-btn>
       <v-btn 
         v-if="userIsAuthenticated"
         class="bottom-navigation-btn" 
         @click="drawer = !drawer">
-          <v-icon>mdi-menu</v-icon>
+          <v-icon color="#10ac84">mdi-menu</v-icon>
       </v-btn>
     </v-list>
   </v-bottom-navigation>
@@ -129,8 +128,3 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .bottom-navigation-btn {
-    margin-top: 7px;
-  }
-</style>

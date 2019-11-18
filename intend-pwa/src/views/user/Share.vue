@@ -1,10 +1,8 @@
 <template>
   <v-container>
-      <Friends/>
-      <Groups/>
+    <Friends/>
+    <Groups/>
   </v-container>
-  
-
 </template>
 
 <script>

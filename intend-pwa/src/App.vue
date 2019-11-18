@@ -1,7 +1,11 @@
 <template>
   <v-app>
-    <Navbar/>
-    <router-view/>
+    <v-container fill-height>
+      <router-view/>
+    </v-container>
+    <v-container>
+      <Navbar/>
+    </v-container>
   </v-app>
 </template>
 
@@ -22,6 +26,6 @@ export default {
 }
 </script>
 
-<style lang="scss" defer>
+<style lang="scss">
   @import './styling/global.scss';
 </style>
