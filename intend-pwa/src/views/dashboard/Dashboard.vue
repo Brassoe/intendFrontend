@@ -1,11 +1,7 @@
 <template>
-<v-container fill-height>
-    <v-layout row wrap align-content-end>
-        <MyModules/>
-    </v-layout>
-
-</v-container>
-
+    <v-container fill-height>
+        
+    </v-container>
 </template>
 
 <script>

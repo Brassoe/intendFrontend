@@ -1,5 +1,5 @@
 <template>
-    <v-layout>
+    <v-layout row align-content-end> 
         <v-flex xs12 md4 v-if="isLoading">
             <app-page-loader/>
         </v-flex>
@@ -20,8 +20,8 @@
                     </v-slide-item>
                 </v-slide-group>
         </v-flex>
-
     </v-layout>
+
 </template>
 
 <script>

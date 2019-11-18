@@ -1,8 +1,8 @@
 <template>
   <nav>
     <v-bottom-navigation
+    dark
     app>
-    <!-- Bottom Navigation if logged in -->
     <v-list class="mt-1">
       <v-btn
         v-for="item in toolbarItems" :key="item.title"
@@ -10,6 +10,12 @@
         router
         :to="item.link">
           <v-icon color="#10ac84">{{item.icon}}</v-icon>
+      </v-btn>
+      <v-btn 
+        v-if="userIsAuthenticated"
+        class="bottom-navigation-btn" 
+        @click="sheet = !sheet">
+          <v-icon color="#10ac84">mdi-view-module</v-icon>
       </v-btn>
       <v-btn 
         v-if="userIsAuthenticated"
@@ -22,6 +28,7 @@
 
   <v-navigation-drawer
   v-if="userIsAuthenticated"
+  dark
   app
   v-model="drawer"
   light
@@ -71,6 +78,32 @@
     </v-list>
   </v-navigation-drawer>
 
+   <v-bottom-sheet v-model="sheet" v-if="userIsAuthenticated">
+      <v-sheet class="text-center" dark height="200px">
+        <div class="py-3">Gå til modul</div>
+        <v-slide-group
+                class="moduleSlider"
+                multiple>
+                    <v-slide-item
+                        v-for="n in 5"
+                        :key="n">
+                            <v-card
+                            class="mx-1"
+                            height="100"
+                            width="100"
+                            img="https://picsum.photos/200/300"
+                            click="">
+                            </v-card>
+                    </v-slide-item>
+                </v-slide-group>
+                <v-btn
+          class="mt-2"
+          text
+          color="red"
+          @click="sheet = !sheet"
+        >Luk</v-btn>
+      </v-sheet>
+    </v-bottom-sheet>
 
   </nav>
 
@@ -83,6 +116,7 @@ export default {
     return {
       drawer: false,
       activeBtn: 1,
+      sheet: false,
     }
   },
   computed: {
@@ -95,7 +129,7 @@ export default {
         items = [
           {icon: 'mdi-home', title: 'Dashboard', link: '/dashboard'},
           {icon: 'mdi-account-multiple', title: 'Venner', link: '/share'},
-          {icon: 'mdi-view-module', title: 'Moduler', link: '/modules'},
+          {icon: 'mdi-store', title: 'Moduler', link: '/modules'},
         ]
       }
       return items
