@@ -1,29 +1,62 @@
-import axios from "axios"
+import apiFunctions from '@/api/functions'
+
 
 export default {
     state: {
-      modulesCatalogue: [],
-      installedModules: []
+      installedModules: [],
+      modulesCatalogue: []
     },
     mutations: {
-      setModulesCatalogue(state, payload) {
+      setModulesCatalog(state, payload) {
         state.modulesCatalogue = payload
+      },
+      setInstalledModules(state, payload) {
+        state.installedModules = payload
+      },
+      updateInstalledModules(state, payload) {
+        state.installedModules.push("dsfsfsd")
       }
     },
     actions:{
       getInstalledModules({commit}, payload) {
         commit('setLoading', true)
-        axios
-                .get('http://localhost:8080/modules/')
-                .then(response => {
-                    response = response.data;
-                    commit('setModulesCatalogue', response)
-                    commit('setLoading', false)
-                })
-                .catch(error => {
-                  console.log(error)
-                  commit('setLoading', false)
-                });
+        apiFunctions.modulesInfo(payload)
+        .then(response => {
+          console.log(response.data)
+          commit('setInstalledModules', response.data)
+          commit('setLoading', false)
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setLoading', false)
+        })
+      },
+      getCatalog({commit, state}){
+        const uid = this.getters.user.uid
+        commit('setLoading', true)
+        apiFunctions.catalogInfo(uid)
+        .then(response => {
+          commit('setModulesCatalog', response.data)
+          commit('setLoading', false)
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setLoading', false)
+        })
+      },
+      installModule({commit}, moduleName) {
+        console.log(moduleName)
+        const uid = this.getters.user.uid
+        console.log(uid)
+        apiFunctions.catalogInstall(uid, moduleName)
+        .then(response => {
+          //Update current installedModules array
+          //commit('updateInstalledModules', )
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
       }
     },
     getters: {

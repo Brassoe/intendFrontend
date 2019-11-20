@@ -10,6 +10,6 @@ export default new Vuex.Store({
   modules: {
     user: user,
     shared: shared,
-    modulesStore: modulesStore
+    modulesStore: modulesStore,
   }
 })

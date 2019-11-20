@@ -6,7 +6,8 @@ import 'firebase/auth';
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
-import PageLoader from './components/shared/PageLoader'
+import PageLoader from './components/shared/PageLoader';
+import apiFunctions from './api/functions'
 
 Vue.config.productionTip = false
 
@@ -29,8 +30,8 @@ new Vue({
     })
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
-        this.$store.dispatch('autoSignIn', user)
-        this.$store.dispatch('getInstalledModules', 1)
+        this.$store.dispatch('autoSignIn', user.uid)
+        this.$store.dispatch('getInstalledModules', user.uid)
       }
     })
     //Intercept router changes

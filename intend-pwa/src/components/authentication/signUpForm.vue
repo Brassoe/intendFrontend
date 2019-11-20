@@ -1,64 +1,124 @@
 <template>
-  <v-container>
-    <v-layout row>
-      <span class="sub-heading">Tilmeld bruger</span>
-      <v-flex xs12 sm6 offset-sm3 >
-        <v-card>
-          <v-card-text>
-            <v-container>
-              <form @submit.prevent="onSignUp">
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                      name="email"
-                      label="Mail"
-                      id="email"
-                      v-model="email"
-                      type="email"
-                      required>
-                    </v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                      name="password"
-                      label="Password"
-                      id="password"
-                      v-model="password"
-                      type="password"
-                      required>
-                    </v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                      name="confirmPassword"
-                      label="Bekræft Password"
-                      id="confirmPassword"
-                      v-model="confirmPassword"
-                      type="password"
-                      :rules="[comparePasswords]">
-                    </v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-btn
-                    v-if="comparePasswords == true"
-                    type="submit">
-                    Opret bruger
-                    </v-btn>
-                  </v-flex>
-                </v-layout>
-              </form>
-            </v-container>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+<v-layout row wrap>
+  <v-flex xs12 md4 mb-5>
+    <span class="sub-heading">Opret bruger</span>
+  </v-flex>
+  <v-flex xs12 md4>
+    <v-stepper dark v-model="e1" height="100%">
+        <v-stepper-header>
+          <v-stepper-step :complete="e1 > 1" step="1" color="#10ac84">Oplysninger om dig</v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1 > 2" step="2" color="#10ac84">Adresse</v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step step="3" color="#10ac84">Login oplysninger</v-stepper-step>
+        </v-stepper-header>
+        <v-stepper-items> 
+          <v-stepper-content step="1">
+              
+            <v-flex xs12>
+            <v-form>
+              <v-text-field
+                name="name"
+                label="Navn"
+                id="name"
+                v-model="name"
+                type="text"
+                required>
+              </v-text-field>
+            </v-form>
+            </v-flex>
+            <v-btn
+            :disabled="!name"
+            text
+            small
+              color="#10ac84"
+              @click="e1 = 2">
+              Fortsæt
+            </v-btn>
+          </v-stepper-content>
+
+          <v-stepper-content step="2">
+            <v-flex xs12>
+            <v-text-field
+              name="address"
+              label="Adresse"
+              id="address"
+              v-model="address"
+              type="text"
+              required>
+            </v-text-field>
+            </v-flex>
+            <v-btn
+            text
+            small
+              color="error"
+              @click="e1 = 1">
+              tilbage
+            </v-btn>
+            <v-btn
+            :disabled="!address"
+            text
+            small
+            color="#10ac84"
+            @click="e1 = 3">
+            Fortsæt
+            </v-btn>
+          </v-stepper-content>
+
+          <v-stepper-content step="3">
+            <form @submit.prevent="onSignUp">
+            <v-flex xs12>
+                <v-text-field
+                  name="email"
+                  label="Mail"
+                  id="email"
+                  v-model="email"
+                  type="email"
+                  required>
+                </v-text-field>
+              </v-flex>
+            <v-flex xs12>
+                <v-text-field
+                  name="password"
+                  label="Password"
+                  id="password"
+                  v-model="password"
+                  type="password"
+                  required>
+                </v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                  <v-text-field
+                    name="confirmPassword"
+                    label="Bekræft Password"
+                    id="confirmPassword"
+                    v-model="confirmPassword"
+                    type="password"
+                    :rules="[comparePasswords]">
+                  </v-text-field>
+                </v-flex>
+                <v-flex xs12 mb-5>
+                  <v-btn
+                  v-if="comparePasswords == true"
+                  type="submit">
+                  Opret bruger
+                  </v-btn>
+                </v-flex>
+            </form>
+
+            <v-btn
+            text
+            small
+              color="error"
+              @click="e1 = 2">
+              tilbage
+            </v-btn>
+          </v-stepper-content>
+        </v-stepper-items>
+    </v-stepper>
+  </v-flex>
+</v-layout>
+    
 </template>
 
 <script>
@@ -66,6 +126,9 @@ export default {
   name: "signUpForm",
   data () {
     return {
+      e1: 0,
+      name: "",
+      address: "",
       email: "",
       password: "",
       confirmPassword: ""
@@ -97,7 +160,13 @@ export default {
   },
   methods: {
     onSignUp() {
-      this.$store.dispatch("signUp", {email: this.email, password: this.password})
+      const newUser = {
+        name: this.name,
+        address: this.address,
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch("signUp", newUser)
     }
   }
 

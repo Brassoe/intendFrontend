@@ -3,6 +3,7 @@
     <v-row class="text-xs-center">
         <span class="sub-heading" >Dine</span>
         <v-card 
+        dark
         class="cards"
         min-width="100%">
                 <v-container>
@@ -52,7 +53,7 @@ export default {
     data () {
         return {
             isActive: false,
-      selected: [],
+            selected: [],
         }
     },
     computed: {

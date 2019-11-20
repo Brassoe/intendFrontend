@@ -3,6 +3,7 @@
     <v-row class="text-xs-center">
         <span class="sub-heading" >Katalog</span>
         <v-card 
+        dark
         class="cards"
         min-width="100%">
                 <v-container>
@@ -28,7 +29,7 @@
                                                 :src="item.images[0]"
                                                 height="100"
                                                 class="text-right pa-2"
-                                                @click="toggle">
+                                                @click="onInstall(item.name)">
                                                     <v-btn
                                                     icon
                                                     dark>
@@ -63,7 +64,11 @@ export default {
             return this.$store.getters.loading
         }
     },
-    methods: {}
+    methods: {
+        onInstall(moduleName){
+            this.$store.dispatch('installModule', moduleName)
+        }
+    }
 
 }
 </script>

@@ -19,7 +19,8 @@ export default {
     ModulesCatalogue
   },
   created(){
-    this.$store.dispatch('getInstalledModules', 1)
+    this.$store.dispatch('getCatalog')
+
   }
 }
 </script>
