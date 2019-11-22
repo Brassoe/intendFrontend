@@ -8,11 +8,11 @@
             v-on="on">
             </v-img>
         </template>
-        <v-card dark>
+        <v-card light>
                 <v-layout row>
                     <v-flex xs12>
                          <v-carousel
-                         height="200"
+                         height="150"
                          cycle
                          hide-delimiters>
                             <v-carousel-item
@@ -30,6 +30,7 @@
                         <v-card-title class="justify-center">{{module.name}}</v-card-title>
                     </v-flex>
                 </v-layout>
+                <v-divider></v-divider>
                 <v-layout row wrap>
                     <v-flex xs12>
                         <v-card-text>
@@ -60,7 +61,7 @@ export default {
     },
     methods: {
         onUninstall() {
-            //this.$store.dispatch('deleteModule', {name: this.module.name, router: this.$router})
+            this.$store.dispatch('deleteModule', this.module.name)
             this.dialog = false
         }
     }

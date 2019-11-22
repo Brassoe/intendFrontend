@@ -79,6 +79,16 @@ export default {
           console.log(error)
         })
       },
+      deleteModule({}, payload){
+        const uid = this.getters.user.uid
+        apiFunctions.modulesDelete(uid, payload)
+        .then(() => {
+          location.reload();
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
     },
     getters: {
       moduleCatalogue: state => state.modulesCatalogue,

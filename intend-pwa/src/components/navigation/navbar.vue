@@ -35,7 +35,8 @@
                       width="100"
                       :img="item.images[0]"
                       router
-                      :to="item.name">
+                      :to="item.name"
+                      @click="sheet = false">
                       </v-card>
                     </v-slide-item>
                 </v-slide-group>

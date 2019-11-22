@@ -1,6 +1,6 @@
 <template>
     <v-card 
-    dark
+    light
     class="cards"
     min-width="100%">
     <v-layout row wrap>

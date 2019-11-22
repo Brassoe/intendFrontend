@@ -38,7 +38,14 @@ const funcs = {
                 }
             })
     },
-    modulesDelete(){},
+    modulesDelete(UID, moduleName){
+        return axios
+            .delete('http://localhost:8080/modules/delete/' + moduleName, {
+                headers: {
+                    uid: UID
+                }
+            })
+    },
     modulesSlug(){},
 }
 export default funcs

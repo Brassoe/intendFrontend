@@ -46,14 +46,7 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
-        .then(
-            user => {
-              const newUser = {
-                uid: user.user.uid
-              }
-              commit('setUser', newUser)
-            }
-        )
+        .then()
         .catch(
           error => {
             console.log(error)
@@ -61,6 +54,7 @@ export default {
         )
     },
     autoSignIn({commit}, payload) {
+      console.log("AUTO SIGN IN")
       apiFunctions.userInfo(payload)
         .then(response => {
           const newUser = {
@@ -78,8 +72,12 @@ export default {
         })
     },
     logout({commit}){
+      //commit('setUser', null)
       firebase.auth().signOut()
-      commit('setUser', null)
+        .then(() => {
+          location.reload();
+
+      })
     }
   },
   getters: {

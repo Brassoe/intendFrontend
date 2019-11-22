@@ -2,10 +2,10 @@
   <nav>
     <v-menu
     dark
-      v-model="menu"
-      :close-on-content-click="false"
-      :nudge-width="300"
-      offset-x>
+    v-model="menu"
+    :close-on-content-click="false"
+    :nudge-width="300"
+    offset-x>
       <template v-slot:activator="{ on }">
         <v-app-bar-nav-icon
         large
@@ -18,7 +18,7 @@
         <v-list>
           <v-list-item>
             <v-list-item-avatar>
-              <v-icon large v-if="!userInfo || !userInfo.profileImage">mdi-account-circle</v-icon>
+              <v-icon large v-if="!userInfo || !userInfo.profileImage" color="#10ac84">mdi-account-circle</v-icon>
               <v-avatar  size="32" v-else>
                 <v-img :src="userInfo.profileImage"></v-img>
               </v-avatar>
@@ -41,7 +41,7 @@
         router
         :to="item.link">
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon color="#10ac84">{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -52,17 +52,22 @@
         <v-list-item
         @click="onLogOut">
           <v-list-item-icon>
-            <v-icon>mdi-exit-to-app</v-icon>
+            <v-icon color="#10ac84">mdi-exit-to-app</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Log Ud</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-divider></v-divider>
     </v-list>
-        <v-card-actions>
-          <v-spacer></v-spacer>
+    <v-layout row>
+      <v-flex xs12>
+        <v-card-actions class="justify-center">
           <v-icon text large color="#10ac84" @click="menu = false">mdi-close-circle</v-icon>
         </v-card-actions>
+
+      </v-flex>
+    </v-layout>
       </v-card>
     </v-menu>
   </nav>
