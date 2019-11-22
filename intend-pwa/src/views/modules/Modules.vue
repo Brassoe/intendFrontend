@@ -1,10 +1,8 @@
 <template>
   <v-container>
-      <InstalledModules class="moduleContainer"/>
+      <InstalledModules/>
       <ModulesCatalogue class="moduleContainer"/>
   </v-container>
-  
-
 </template>
 
 <script>
@@ -20,7 +18,6 @@ export default {
   },
   created(){
     this.$store.dispatch('getCatalog')
-
   }
 }
 </script>

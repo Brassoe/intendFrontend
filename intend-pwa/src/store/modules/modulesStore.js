@@ -1,4 +1,5 @@
 import apiFunctions from '@/api/functions'
+import formatting from '@/api/helpers/formatting'
 
 
 export default {
@@ -14,15 +15,27 @@ export default {
         state.installedModules = payload
       },
       updateInstalledModules(state, payload) {
-        state.installedModules.push("dsfsfsd")
+        console.log(payload)
+        state.installedModules.push(payload)
       }
     },
     actions:{
       getInstalledModules({commit}, payload) {
         commit('setLoading', true)
-        apiFunctions.modulesInfo(payload)
+        const router = payload.router
+        apiFunctions.modulesInfo(payload.uid)
         .then(response => {
-          console.log(response.data)
+          const moduleRoutes = response.data
+          moduleRoutes.forEach(item => {
+            const formattedName = formatting.formatName(item.name)
+            router.addRoutes(
+              [{
+              path: '/' + item.name,
+              name: formattedName,
+              component: () => import('@/views/modules/' + formattedName)
+              }]
+            )
+          });
           commit('setInstalledModules', response.data)
           commit('setLoading', false)
         })
@@ -31,7 +44,7 @@ export default {
           commit('setLoading', false)
         })
       },
-      getCatalog({commit, state}){
+      getCatalog({commit}){
         const uid = this.getters.user.uid
         commit('setLoading', true)
         apiFunctions.catalogInfo(uid)
@@ -44,20 +57,28 @@ export default {
           commit('setLoading', false)
         })
       },
-      installModule({commit}, moduleName) {
-        console.log(moduleName)
+      installModule({commit, dispatch}, payload) {
         const uid = this.getters.user.uid
-        console.log(uid)
-        apiFunctions.catalogInstall(uid, moduleName)
+        const router = payload.router
+        apiFunctions.catalogInstall(uid, payload.name)
         .then(response => {
-          //Update current installedModules array
-          //commit('updateInstalledModules', )
-          console.log(response.data)
+          const formattedName = formatting.formatName(response.data.name)
+          router.addRoutes(
+            [{
+              path: '/' + response.data.name,
+              name: formattedName,
+              component: () => import('@/views/modules/' + formattedName)
+            }]);
+            //Update current installedModules array
+            commit('updateInstalledModules', response.data)
+            //Update new catalog array
+
+            dispatch('getCatalog')
         })
         .catch(error => {
           console.log(error)
         })
-      }
+      },
     },
     getters: {
       moduleCatalogue: state => state.modulesCatalogue,

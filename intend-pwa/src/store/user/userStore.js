@@ -49,7 +49,7 @@ export default {
         .then(
             user => {
               const newUser = {
-                id: user.user.uid
+                uid: user.user.uid
               }
               commit('setUser', newUser)
             }

@@ -27,15 +27,16 @@
                 class="moduleSlider"
                 multiple>
                     <v-slide-item
-                        v-for="n in 5"
-                        :key="n">
-                            <v-card
-                            class="mx-1"
-                            height="100"
-                            width="100"
-                            img="https://picsum.photos/200/300"
-                            click="">
-                            </v-card>
+                    v-for="(item, i) in installedModules"
+                    :key="i">
+                      <v-card
+                      class="mx-1"
+                      height="100"
+                      width="100"
+                      :img="item.images[0]"
+                      router
+                      :to="item.name">
+                      </v-card>
                     </v-slide-item>
                 </v-slide-group>
                 <v-btn
@@ -84,6 +85,9 @@ export default {
     },
     userIsAuthenticated() {
       return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    },
+    installedModules() {
+      return this.$store.getters.installedModules
     },
     
   },

@@ -31,7 +31,7 @@ new Vue({
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         this.$store.dispatch('autoSignIn', user.uid)
-        this.$store.dispatch('getInstalledModules', user.uid)
+        this.$store.dispatch('getInstalledModules', {uid: user.uid, router: this.$router})
       }
     })
     //Intercept router changes

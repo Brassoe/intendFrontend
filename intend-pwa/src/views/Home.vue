@@ -9,6 +9,9 @@
 export default {
   name: 'home',
   components: {
+  },
+  created() {
+    console.log("Hello from home")
   }
 }
 </script>
