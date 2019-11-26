@@ -29,7 +29,9 @@ new Vue({
       appId: "1:25281633197:web:07cedbc32f9febabbd1f24"
     })
     firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+      const signingIn = this.$store.getters.signUp
+      console.log(signingIn)
+      if(user && !signingIn) {
         this.$store.dispatch('autoSignIn', user.uid)
         this.$store.dispatch('getInstalledModules', {uid: user.uid, router: this.$router})
       }

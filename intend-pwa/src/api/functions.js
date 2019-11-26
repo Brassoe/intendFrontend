@@ -10,7 +10,7 @@ const funcs = {
     },
     userCreate(payload){
         return axios
-            .post('http://localhost:8080/user/create', payload)
+            .post('http://localhost:8080/user', payload)
     },
     userDelete(UID){},
     userUpdate(UID, payload){},
@@ -40,7 +40,7 @@ const funcs = {
     },
     modulesDelete(UID, moduleName){
         return axios
-            .delete('http://localhost:8080/modules/delete/' + moduleName, {
+            .delete('http://localhost:8080/modules/' + moduleName, {
                 headers: {
                     uid: UID
                 }

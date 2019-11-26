@@ -14,6 +14,7 @@ export default {
   },
   actions: {
     signUp({commit}, payload){
+      commit('setSignUp', true)
         firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
@@ -27,13 +28,14 @@ export default {
               uid: user.user.uid
             }
             apiFunctions.userCreate(newUser)
-              .then(response => {
-                console.log(response)
+              .then(() => {
+                commit('setSignUp', false)
+                commit('setUser', newUser)
               })
               .catch(error => {
                 console.log(error)
+                commit('setSignUp', false)
               })
-            commit('setUser', newUser)
           }
         )
         .catch(
