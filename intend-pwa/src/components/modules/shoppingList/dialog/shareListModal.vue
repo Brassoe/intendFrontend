@@ -14,8 +14,7 @@
             </v-btn>
         </template>
             <v-card dark>
-                        <v-card-title class="justify-center">{{text}}</v-card-title>
-                        <v-card-subtitle>her kan du se hvem du på nuværende tidspunkt deler denne liste med.</v-card-subtitle>
+                        <v-card-title class="justify-center">{{text}} bliver delt med</v-card-title>
                 <v-divider></v-divider>
                         <v-list flat>
                             <v-list-item-group v-model="model">
