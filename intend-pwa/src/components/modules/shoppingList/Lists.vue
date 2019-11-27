@@ -45,7 +45,8 @@
                                     <v-flex v-if="item.name != ''">
                                         <v-checkbox
                                         v-model="item.checked"
-                                        color="#10ac84">
+                                        color="#10ac84"
+                                        @click="flipCheck(i, j)">
                                         </v-checkbox>
                                     </v-flex>
                                     <v-flex ml-3>
