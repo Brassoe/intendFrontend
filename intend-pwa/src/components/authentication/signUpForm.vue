@@ -1,10 +1,10 @@
 <template>
 <v-layout row wrap>
-  <v-flex xs12 md4 mb-5>
-    <span class="sub-heading">Opret bruger</span>
+  <v-flex xs12>
+    <alert-error @dismissed="onDismissed"/>
   </v-flex>
   <v-flex xs12 md4>
-    <v-stepper dark v-model="e1" height="100%">
+    <v-stepper light v-model="e1" height="100%">
         <v-stepper-header>
           <v-stepper-step :complete="e1 > 1" step="1" color="#10ac84">Oplysninger om dig</v-stepper-step>
           <v-divider></v-divider>
@@ -19,7 +19,7 @@
             <v-form>
               <v-text-field
                 name="name"
-                label="Navn"
+                placeholder="Navn"
                 id="name"
                 v-model="name"
                 type="text"
@@ -41,7 +41,7 @@
             <v-flex xs12>
             <v-text-field
               name="address"
-              label="Adresse"
+              placeholder="Adresse"
               id="address"
               v-model="address"
               type="text"
@@ -70,7 +70,7 @@
             <v-flex xs12>
                 <v-text-field
                   name="email"
-                  label="Mail"
+                  placeholder="Email"
                   id="email"
                   v-model="email"
                   type="email"
@@ -80,7 +80,7 @@
             <v-flex xs12>
                 <v-text-field
                   name="password"
-                  label="Password"
+                  placeholder="Password"
                   id="password"
                   v-model="password"
                   type="password"
@@ -90,7 +90,7 @@
               <v-flex xs12>
                   <v-text-field
                     name="confirmPassword"
-                    label="Bekræft Password"
+                    placeholder="Bekræft Password"
                     id="confirmPassword"
                     v-model="confirmPassword"
                     type="password"
@@ -134,6 +134,9 @@ export default {
       confirmPassword: ""
     }
   },
+  created() {
+    this.$store.dispatch('clearError')
+  },
   computed: {
     comparePasswords () {
       if(this.password == "" || this.confirmPassword == ""){
@@ -167,6 +170,9 @@ export default {
         password: this.password
       }
       this.$store.dispatch("signUp", newUser)
+    },
+    onDismissed() {
+      this.$store.dispatch('clearError')
     }
   }
 

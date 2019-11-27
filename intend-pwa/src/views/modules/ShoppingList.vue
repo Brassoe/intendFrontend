@@ -1,7 +1,5 @@
 <template>
-  <v-container>
     <Lists/>
-  </v-container>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import 'firebase/auth';
-import apiFunctions from '@/api/functions'
+import baseFunctions from '@/api/baseFunctions'
 
  
 export default {
@@ -27,20 +27,20 @@ export default {
               email: payload.email,
               uid: user.user.uid
             }
-            apiFunctions.userCreate(newUser)
+            baseFunctions.userCreate(newUser)
               .then(() => {
                 commit('setSignUp', false)
                 commit('setUser', newUser)
               })
               .catch(error => {
-                console.log(error)
+                commit('setErrorMessage', error.message)
                 commit('setSignUp', false)
               })
           }
         )
         .catch(
           error => {
-            console.log(error)
+            commit('setErrorMessage', error.message)
           }
         )
     },
@@ -51,13 +51,13 @@ export default {
         .then()
         .catch(
           error => {
+            commit('setErrorMessage', error.message)
             console.log(error)
           }
         )
     },
     autoSignIn({commit}, payload) {
-      console.log("AUTO SIGN IN")
-      apiFunctions.userInfo(payload)
+      baseFunctions.userInfo(payload)
         .then(response => {
           const newUser = {
             name: response.data.name,
@@ -70,6 +70,7 @@ export default {
         })
         // TODO - Handle error
         .catch(error => {
+          commit('setErrorMessage', error.message)
           console.log(error)
         })
     },

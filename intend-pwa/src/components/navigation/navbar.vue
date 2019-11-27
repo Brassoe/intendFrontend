@@ -3,50 +3,49 @@
     <v-bottom-navigation
     dark
     app>
-    <v-list class="mt-1">
-      <v-btn
-        v-for="item in toolbarItems" :key="item.title"
-        class="bottom-navigation-btn"
-        router
-        :to="item.link">
-          <v-icon color="#10ac84">{{item.icon}}</v-icon>
-      </v-btn>
-      <v-btn 
-        v-if="userIsAuthenticated"
-        class="bottom-navigation-btn" 
-        @click="sheet = !sheet">
-          <v-icon color="#10ac84">mdi-view-module</v-icon>
-      </v-btn>
-    </v-list>
-  </v-bottom-navigation>
-
-   <v-bottom-sheet v-model="sheet" v-if="userIsAuthenticated">
-      <v-sheet class="text-center" dark height="200px">
-        <div class="py-3">Gå til modul</div>
-        <v-slide-group
-                class="moduleSlider"
-                multiple>
-                    <v-slide-item
-                    v-for="(item, i) in installedModules"
-                    :key="i">
-                      <v-card
-                      class="mx-1"
-                      height="100"
-                      width="100"
-                      :img="item.images[0]"
-                      router
-                      :to="item.name"
-                      @click="sheet = false">
-                      </v-card>
-                    </v-slide-item>
-                </v-slide-group>
-                <v-btn
-          class="mt-2"
-          text
-          color="red"
-          @click="sheet = !sheet"
-        >Luk</v-btn>
-      </v-sheet>
+      <v-list class="mt-1">
+        <v-btn
+          v-for="item in toolbarItems" :key="item.title"
+          class="bottom-navigation-btn"
+          router
+          :to="item.link">
+            <v-icon color="#10ac84">{{item.icon}}</v-icon>
+        </v-btn>
+        <v-btn 
+          v-if="userIsAuthenticated && installedModules.length != 0"
+          class="bottom-navigation-btn" 
+          @click="sheet = !sheet">
+            <v-icon color="#10ac84">mdi-view-module</v-icon>
+        </v-btn>
+      </v-list>
+    </v-bottom-navigation>
+    <v-bottom-sheet v-model="sheet" v-if="userIsAuthenticated">
+          <v-sheet class="text-center" dark>
+            <span>Dine moduler</span>
+            <v-slide-group
+              class="moduleSlider"
+              multiple>
+                <v-slide-item
+                v-for="(item, i) in installedModules"
+                :key="i">
+                  <v-card
+                  class="mx-1"
+                  height="100"
+                  width="100"
+                  :img="item.images[0]"
+                  router
+                  :to="item.name"
+                  @click="sheet = false">
+                  </v-card>
+                </v-slide-item>
+              </v-slide-group>
+              <v-btn
+              @click="sheet = !sheet"
+              color="error"
+              text>
+              luk
+              </v-btn>
+          </v-sheet>
     </v-bottom-sheet>
   </nav>
 </template>

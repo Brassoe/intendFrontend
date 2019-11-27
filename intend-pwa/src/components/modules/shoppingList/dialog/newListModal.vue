@@ -1,10 +1,15 @@
 <template>
     <v-dialog v-model="dialog" width="100%" >
         <template v-slot:activator="{ on }">
-            <v-btn size="50" fab>
+            <v-btn 
+            absolute
+            top
+            color="#E4A953" 
+            size="50" 
+            fab>
             <v-icon 
             size="40" 
-            color="#10ac84"
+            color="#fff"
             v-on="on">
                 mdi-playlist-plus
             </v-icon>

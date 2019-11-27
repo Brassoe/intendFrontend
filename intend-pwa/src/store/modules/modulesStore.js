@@ -1,4 +1,4 @@
-import apiFunctions from '@/api/functions'
+import baseFunctions from '@/api/baseFunctions'
 import formatting from '@/api/helpers/formatting'
 
 
@@ -23,7 +23,7 @@ export default {
       getInstalledModules({commit}, payload) {
         commit('setLoading', true)
         const router = payload.router
-        apiFunctions.modulesInfo(payload.uid)
+        baseFunctions.modulesInfo(payload.uid)
         .then(response => {
           const moduleRoutes = response.data
           moduleRoutes.forEach(item => {
@@ -47,7 +47,7 @@ export default {
       getCatalog({commit}){
         const uid = this.getters.user.uid
         commit('setLoading', true)
-        apiFunctions.catalogInfo(uid)
+        baseFunctions.catalogInfo(uid)
         .then(response => {
           commit('setModulesCatalog', response.data)
           commit('setLoading', false)
@@ -60,7 +60,7 @@ export default {
       installModule({commit, dispatch}, payload) {
         const uid = this.getters.user.uid
         const router = payload.router
-        apiFunctions.catalogInstall(uid, payload.name)
+        baseFunctions.catalogInstall(uid, payload.name)
         .then(response => {
           const formattedName = formatting.formatName(response.data.name)
           router.addRoutes(
@@ -81,7 +81,7 @@ export default {
       },
       deleteModule({}, payload){
         const uid = this.getters.user.uid
-        apiFunctions.modulesDelete(uid, payload)
+        baseFunctions.modulesDelete(uid, payload)
         .then(() => {
           location.reload();
         })

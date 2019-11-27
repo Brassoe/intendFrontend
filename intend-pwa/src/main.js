@@ -7,11 +7,12 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import PageLoader from './components/shared/PageLoader';
-import apiFunctions from './api/functions'
+import AlertError from './components/shared/Alert'
 
 Vue.config.productionTip = false
 
 Vue.component('app-page-loader', PageLoader)
+Vue.component('alert-error', AlertError)
 
 
 
@@ -30,7 +31,6 @@ new Vue({
     })
     firebase.auth().onAuthStateChanged((user) => {
       const signingIn = this.$store.getters.signUp
-      console.log(signingIn)
       if(user && !signingIn) {
         this.$store.dispatch('autoSignIn', user.uid)
         this.$store.dispatch('getInstalledModules', {uid: user.uid, router: this.$router})

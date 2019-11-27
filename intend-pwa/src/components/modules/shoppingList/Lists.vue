@@ -1,59 +1,51 @@
 <template>
 <v-container>
-    <v-card>
+    <v-card flat color="transparent">
         <v-layout row> 
             <v-flex xs12>
-                <v-card-title class="justify-center">
+                <v-card-actions class="justify-center mb-5">
                     <newListModal/>
-                </v-card-title>
+                </v-card-actions>
             </v-flex>
         </v-layout>
     </v-card>
-    <v-spacer></v-spacer>
     <v-card
-    color="#f5f6fa"
+    dark
+    class="mb-12"
     v-for="(list, i) in lists" :key="i">
+        <deleteListModal :text="list.name" :index="i"/>
+        <shareListModal :text="list.name"/>
         <v-layout row>
             <v-flex xs12>
                 <v-card-title class="justify-center">{{list.name}}</v-card-title>
             </v-flex>
-            <v-flex>
-                <v-card-actions class="justify-center">
-                    <v-btn medium color="error" text fab>
-                        <v-icon
-                        medium
-                        @click="onDeleteList(i)">
-                        mdi-playlist-minus</v-icon>
-                    </v-btn>
-                </v-card-actions>
-            </v-flex>
         </v-layout>
         <v-list
-        color="#f5f6fa">
+        dark
+        flat>
             <v-list-item-group multiple>
                 <template v-for="(item, j) in list.items">
                     <v-list-item
                     :key="`item-${j}`"
-                    :value="item"
-                    @click="itemOnClick(item, j)">
-                        <template v-slot:default="{ active, toggle }">
-                            <v-list-item-content v-if="item != ''">
-                                <v-list-item-title v-text="item"></v-list-item-title>
+                    @click="flipCheck(i, j)">
+                        <template>
+                            <v-list-item-content v-if="item.name != ''">
+                                <v-list-item-title v-text="item.name"></v-list-item-title>
                             </v-list-item-content>
                             <v-list-item-content v-else>
                                 <v-text-field
+                                @keydown.enter="onSaveItem(i, j)"
                                 autofocus
+                                v-model="itemName"
                                 placeholder="Indsæt navn">
                                 </v-text-field>
                             </v-list-item-content>
                             <v-list-item-action>
-                                <v-layout row>
-                                    <v-flex>
+                                <v-layout row >
+                                    <v-flex v-if="item.name != ''">
                                         <v-checkbox
-                                        :input-value="active"
-                                        :true-value="item"
-                                        color="#10ac84"
-                                        @click="toggle">
+                                        v-model="item.checked"
+                                        color="#10ac84">
                                         </v-checkbox>
                                     </v-flex>
                                     <v-flex ml-3>
@@ -73,7 +65,7 @@
                         <v-layout row>
                             <v-flex xs12>
                                 <v-card-title class="justify-center">
-                                    <v-icon color="#10ac84">mdi-plus-circle-outline</v-icon>
+                                    <v-icon color="#E4A953">mdi-plus-circle-outline</v-icon>
                                 </v-card-title>
                             </v-flex>
                         </v-layout>
@@ -86,14 +78,20 @@
 
 <script>
 import newListModal from './dialog/newListModal'
+import deleteListModal from './dialog/deleteListModal'
+import shareListModal from './dialog/shareListModal'
 
 export default {
     name: "Lists",
     components: {
-        newListModal
+        newListModal,
+        deleteListModal,
+        shareListModal
     },
     data () {
-        return {}
+        return {
+            itemName: null
+        }
     },
     computed: {
         lists () {
@@ -101,20 +99,24 @@ export default {
         }
     },
     methods: {
-        itemOnClick(item, itemId) {
+        flipCheck(listIndex, itemIndex) {
             //Store function check/uncheck
+            this.$store.dispatch('flipCheck', {listIndex: listIndex, itemIndex: itemIndex})
         },
         onNewItemClick(index){
-            this.$store.dispatch('addListItem', index)
+            this.$store.dispatch('addTmpListItem', index)
+        },
+        onSaveItem(listIndex, itemIndex) {
+            this.$store.dispatch('saveItem', {
+                itemName: this.itemName, 
+                listIndex: listIndex, 
+                itemIndex: itemIndex
+                })
+            this.itemName = null;
         },
         onDeleteItem(ListIndex, itemIndex) {
             //TODO - SEND ITEM ID 
             this.$store.dispatch('deleteListItem', {ListIndex: ListIndex, ItemIndex: itemIndex})
-        },
-        onDeleteList(index){
-            //store function delete entire list 
-            this.$store.dispatch('deleteList', {index: index})
-            //this.lists.splice([index], 1)
         }
     }
 }

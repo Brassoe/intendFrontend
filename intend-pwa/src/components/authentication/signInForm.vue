@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-layout row>
-      <span class="sub-heading">Log ind</span>
+      <v-flex xs12>
+        <alert-error @dismissed="onDismissed"/>
+      </v-flex>
       <v-flex xs12 sm6 offset-sm3 >
         <v-card>
           <v-card-text>
@@ -57,6 +59,9 @@ export default {
       password: ""
     }
   },
+  created() {
+    this.$store.dispatch('clearError')
+  },
   computed: {
       user () {
           return this.$store.getters.user
@@ -72,6 +77,9 @@ export default {
   methods: {
     onSignIn() {
       this.$store.dispatch("signIn", {email: this.email, password: this.password})
+    },
+    onDismissed() {
+      this.$store.dispatch('clearError')
     }
   }
 }
