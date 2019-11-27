@@ -3,7 +3,7 @@
     <v-card flat color="transparent">
         <v-layout row> 
             <v-flex xs12>
-                <v-card-actions class="justify-center mb-5">
+                <v-card-actions class="justify-center mb-12">
                     <newListModal/>
                 </v-card-actions>
             </v-flex>

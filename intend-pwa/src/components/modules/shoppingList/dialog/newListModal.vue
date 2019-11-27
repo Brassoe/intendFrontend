@@ -15,42 +15,38 @@
             </v-icon>
             </v-btn>
         </template>
-        <v-container>
-    <v-layout row>
-      <v-flex xs12 sm6 offset-sm3 >
-        <v-card>
+        <v-card dark>
           <v-card-text>
             <v-container>
               <form @submit.prevent="onListCreate">
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                      name="name"
-                      label="Navn på listen"
-                      id="name"
-                      v-model="name"
-                      type="text"
-                      required>
-                    </v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
-                      <v-card-actions class="justify-center">
-                        <v-btn
-                        type="submit">
-                        Opret
-                        </v-btn>
-                      </v-card-actions>
-                  </v-flex>
-                </v-layout>
+                <v-text-field
+                  name="name"
+                  placeholder="Navn på listen"
+                  id="name"
+                  v-model="name"
+                  type="text"
+                  required>
+                </v-text-field>
+                <v-card-actions class="justify-center">
+                  <v-btn
+                  text
+                  color="green"
+                  type="submit">
+                  <v-icon>mdi-playlist-plus</v-icon>
+                  Opret
+                  </v-btn>
+                  <v-btn
+                    color="error"
+                    text
+                    @click="dialog = false">
+                    <v-icon>mdi-close-circle-outline</v-icon>
+                    Luk
+                    </v-btn>
+                </v-card-actions>
               </form>
             </v-container>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
     </v-dialog>
 </template>
 
