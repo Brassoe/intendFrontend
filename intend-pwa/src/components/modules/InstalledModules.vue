@@ -1,6 +1,5 @@
 <template>
     <v-card 
-    light
     class="cards"
     min-width="100%">
         <v-layout row wrap>

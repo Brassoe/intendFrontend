@@ -14,7 +14,8 @@ export default {
             state.lists.push({
                 name: payload.name,
                 id: null,
-                items: []
+                items: [],
+                color: ''
 
             })
         },
@@ -23,7 +24,7 @@ export default {
             state.lists[payload.index].items.push({
                 name: '',
                 id: null,
-                checked: false
+                checked: false,
             })
         },
         //update specific item on specific list
@@ -41,6 +42,9 @@ export default {
         //deletes an entire specific list on lists array
         deleteList(state, payload) {
             state.lists.splice([payload.index], 1)
+        },
+        updateColor(state, payload){
+            state.lists[payload.index].color = payload.color
         }
     },
     actions: {
@@ -73,6 +77,9 @@ export default {
         deleteList({commit}, payload){
             //API CALL
             commit('deleteList', payload)
+        },
+        updateColor({commit}, payload){
+            commit('updateColor', payload)
         }
     },
     getters: {

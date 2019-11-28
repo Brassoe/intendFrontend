@@ -1,20 +1,69 @@
 <template>
     <v-dialog v-model="dialog" width="100%" >
         <template v-slot:activator="{ on }">
-            <v-img
-            :src="module.images[0]"
-            height="100"
-            class="text-right pa-2"
+            <v-btn 
+            class="px-10 catalog-show-more-btn"
             v-on="on">
-            </v-img>
+                <v-icon> mdi-arrow-right</v-icon>
+            </v-btn>
         </template>
-        <v-card light>
-                <v-layout row>
+        <v-card>
+            <v-layout>
+                <v-flex xs12> 
+                    <v-btn
+                    id="modal-close-btn"
+                    text
+                    x-small
+                    color="error"
+                    @click="dialog = false">
+                        <v-icon>mdi-close-circle-outline</v-icon>
+                    </v-btn>
+                </v-flex>
+            </v-layout>
+                <v-layout
+                class="modalModuleContainer">
+                    <v-flex xs12>
+                        <div class="modal-container">
+                            <v-badge
+                            color="teal"
+                            right
+                            :overlap="false"
+                            class="modal-catalogTag">
+                            <template v-slot:badge>
+                                <v-icon>mdi-tag</v-icon>
+                            </template>
+                                <div class="title font-weight-thin">Planlægning</div>
+                            </v-badge>
+                            <div class="display-1 font-weight-light">{{module.name}}</div>
+                            <div class="display-1 font-weight-thin">{{module.price}},-</div>
+                        </div>
+                    </v-flex>
+                </v-layout>
+                <v-layout>
+                    <v-flex xs12>
+                        <div class="body-1 font-weight-light module-description">{{module.description}}</div>
+                    </v-flex>
+                </v-layout>
+                <v-layout>
+                    <v-flex xs12>
+                        <v-card-actions class="justify-center mt-10">
+                            <v-btn
+                            class="install-button" 
+                            fab
+                            color="#10ac84" 
+                            @click="onInstall">
+                            <v-icon>mdi-download</v-icon>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-flex>
+                </v-layout>
+                <v-layout>
                     <v-flex xs12>
                          <v-carousel
-                         height="150"
+                         height="200"
                          cycle
-                         hide-delimiters>
+                         hide-delimiters
+                         :show-arrows="false">
                             <v-carousel-item
                             v-for="item in module.images"
                             :key="item"
@@ -23,29 +72,6 @@
                             transition="fade-transition"
                             ></v-carousel-item>
                         </v-carousel>
-                    </v-flex>
-                </v-layout>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-card-title class="justify-center">{{module.name}}</v-card-title>
-                    </v-flex>
-                </v-layout>
-                <v-divider></v-divider>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-card-text>
-                            {{module.description}}
-                        </v-card-text>
-                    </v-flex>
-                </v-layout>
-                <v-divider></v-divider>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-card-actions>
-                            <v-btn text color="#10ac84" @click="onInstall">Installer</v-btn>
-                            <v-spacer></v-spacer>
-                            <v-btn text color="error" @click="dialog = false">Luk</v-btn>
-                        </v-card-actions>
                     </v-flex>
                 </v-layout>
         </v-card>
@@ -70,3 +96,20 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+    .modalModuleContainer {
+        padding: 40px 0px 0px 0px;
+        margin-left: 5%
+    }
+    .module-description {
+        margin-top: 20px;
+        margin-left: 5%
+    }
+    #modal-close-btn{
+        margin-top: 1%;
+        left: 88%;
+    }
+
+
+</style>

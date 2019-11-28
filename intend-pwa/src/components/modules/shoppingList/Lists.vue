@@ -10,18 +10,19 @@
         </v-layout>
     </v-card>
     <v-card
-    dark
+    v-for="(list, i) in lists" :key="i"
     class="mb-12"
-    v-for="(list, i) in lists" :key="i">
+    :color="list.color">
         <deleteListModal :text="list.name" :index="i"/>
         <shareListModal :text="list.name"/>
+        <pickColorModal :index="i"/>
         <v-layout row>
             <v-flex xs12>
                 <v-card-title class="justify-center">{{list.name}}</v-card-title>
             </v-flex>
         </v-layout>
         <v-list
-        dark
+        :color="list.color"
         flat>
             <v-list-item-group multiple>
                 <template v-for="(item, j) in list.items">
@@ -59,6 +60,7 @@
                             </v-list-item-action>
                         </template>
                     </v-list-item>
+                    <v-divider :key="`item-${j}--divider`"></v-divider>
                 </template>
                     <v-list-item
                     :key="`item-${i}-end`"
@@ -66,7 +68,7 @@
                         <v-layout row>
                             <v-flex xs12>
                                 <v-card-title class="justify-center">
-                                    <v-icon color="#E4A953">mdi-plus-circle-outline</v-icon>
+                                    <v-icon color="#000">mdi-plus-circle-outline</v-icon>
                                 </v-card-title>
                             </v-flex>
                         </v-layout>
@@ -81,13 +83,15 @@
 import newListModal from './dialog/newListModal'
 import deleteListModal from './dialog/deleteListModal'
 import shareListModal from './dialog/shareListModal'
+import pickColorModal from './dialog/pickColorModal'
 
 export default {
     name: "Lists",
     components: {
         newListModal,
         deleteListModal,
-        shareListModal
+        shareListModal,
+        pickColorModal
     },
     data () {
         return {
@@ -122,3 +126,4 @@ export default {
     }
 }
 </script>
+

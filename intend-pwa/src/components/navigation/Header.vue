@@ -8,15 +8,18 @@
     offset-x>
       <template v-slot:activator="{ on }">
         <v-app-bar-nav-icon
+        class="headerDraw"
         large
-        light
+        dark
         v-on="on">
         </v-app-bar-nav-icon>
       </template>
 
       <v-card>
         <v-list>
-          <v-list-item>
+          <v-list-item
+          router
+          to="/profile">
             <v-list-item-avatar>
               <v-icon large v-if="!userInfo || !userInfo.profileImage" color="#10ac84">mdi-account-circle</v-icon>
               <v-avatar  size="32" v-else>
@@ -93,7 +96,6 @@ export default {
     },
     navigationDrawerItems() {
         let items = [
-          {icon: 'mdi-account', title: 'Konto', link: '/account'},
           {icon: 'mdi-settings', title: 'Indstillinger', link: '/settings'}
 
           
@@ -115,3 +117,12 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+  .headerDraw {
+    margin-top: 7%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+  }
+
+
+</style>

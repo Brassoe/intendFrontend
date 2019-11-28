@@ -1,20 +1,17 @@
 <template>
   <v-container>
-      <InstalledModules/>
-      <ModulesCatalogue class="moduleContainer"/>
+      <ModulesCatalog/>
   </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
-import InstalledModules from '@/components/modules/InstalledModules.vue'
-import ModulesCatalogue from '@/components/modules/ModulesCatalogue.vue'
+import ModulesCatalog from '@/components/modules/ModulesCatalog.vue'
 
 export default {
   name: 'Modules',
   components: {
-    InstalledModules,
-    ModulesCatalogue
+    ModulesCatalog,
   },
   created(){
     this.$store.dispatch('getCatalog')

@@ -1,6 +1,5 @@
 <template>
   <v-container>
-
   </v-container>
   
 
@@ -8,7 +7,6 @@
 
 <script>
 // @ is an alias to /src
-
 
 export default {
   name: 'Account',

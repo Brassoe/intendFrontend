@@ -1,17 +1,13 @@
 <template>
   <v-app>
-    <!-- Header only for authenticated users -->
-    <v-container v-if="userIsAuthenticated">
-      <Header/>
-    </v-container>
-    <!-- Basic router view -->
-    <v-container fill-height>
-      <router-view/>
-    </v-container>
-    <!-- Bottom toolbar -->
-    <v-container>
-      <Navbar/>
-    </v-container>
+    <v-content>
+      <!-- Header only for authenticated users -->
+        <Header v-if="userIsAuthenticated"/>
+      <!-- Basic router view -->
+        <router-view/>
+      <!-- Bottom toolbar -->
+        <Navbar/>
+    </v-content>
   </v-app>
 </template>
 
