@@ -23,10 +23,10 @@
             </v-flex>
             <v-flex xs5>
                 <v-img
-                class="catalogPresentationIcon"
+                class="mt-8"
                 :src="item.images[0]"
-                height="100"
-                width="100">
+                height="120"
+                width="120">
                 </v-img>
             </v-flex>
         </v-layout>
@@ -67,19 +67,15 @@ export default {
     }
 
     .catalogContainer > div {
-        margin-left: 15%;
+        margin-left: 10%;
     }
     .catalogTag {
-        margin-left: 15%;
+        margin-left: 10%;
     }
     .catalog-show-more-btn {
-        margin-top: 5%;
-        margin-left: 15%;
+        margin-top: 10%;
+        margin-left: 10%;
         border-radius: 20px;
-    }
-    .catalogPresentationIcon {
-        margin-top: 20%;
-        margin-right: 10%;
     }
     .catalogItemsContainer {
         padding: 30px 0px 30px 0px;

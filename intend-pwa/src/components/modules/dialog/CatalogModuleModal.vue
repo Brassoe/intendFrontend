@@ -1,9 +1,10 @@
 <template>
-    <v-dialog v-model="dialog" width="100%" >
+    <v-dialog v-model="dialog" >
         <template v-slot:activator="{ on }">
             <v-btn 
             class="px-10 catalog-show-more-btn"
-            v-on="on">
+            v-on="on"
+            color="#10ac84">
                 <v-icon> mdi-arrow-right</v-icon>
             </v-btn>
         </template>
@@ -108,7 +109,7 @@ export default {
     }
     #modal-close-btn{
         margin-top: 1%;
-        left: 88%;
+        left: 85%;
     }
 
 

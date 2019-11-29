@@ -1,34 +1,39 @@
 <template>
     <v-container>
         <v-card>
-            <v-list>
-            <v-list-item-group>
-                <v-list-item
+            <v-row>
+                <v-col
                 v-for="(item, i) in items"
                 :key="i"
-                class="mx-5 my-2 tile"
-                >
-                <v-list-item-icon>
-                    <v-icon v-text="item.icon"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title v-text="item.text"></v-list-item-title>
-                </v-list-item-content>
-                </v-list-item>
-            </v-list-item-group>
-            </v-list>
-            <v-row no-gutters>
-                <v-spacer></v-spacer>
-                <v-btn
-                class="ma-1"
-                color="#10ac84"
-                fab 
-                small 
-                dark
-                @click="">
-                <v-icon>mdi-account-plus</v-icon>
-                </v-btn>
-            </v-row>
+                cols="4"
+                md="3">
+                    <v-layout wrap>
+                        <v-flex xs12>
+                            <v-avatar 
+                            class="friend-avatar"
+                            size="65">
+                                <img
+                                src="https://picsum.photos/200"
+                                alt="John">
+                            </v-avatar>
+                        </v-flex>
+                        <v-flex xs12>
+                            <div class="text-center mt-1">{{item.text}}</div>
+                        </v-flex>
+                    </v-layout>
+                </v-col>
+            </v-row>    
+                <v-card-actions class="justify-center">
+                    <v-btn
+                    class="ma-1"
+                    color="#10ac84"
+                    fab 
+                    small 
+                    dark
+                    @click="">
+                        <v-icon>mdi-account-plus</v-icon>
+                    </v-btn>
+                </v-card-actions>
         </v-card>
     </v-container>
 </template>
@@ -55,6 +60,22 @@ export default {
                 icon: 'mdi-account-circle',
                 text: 'Christian',
                 },
+                {
+                icon: 'mdi-account-circle',
+                text: 'Ole',
+                },
+                {
+                icon: 'mdi-account-circle',
+                text: 'Ditte',
+                },
+                {
+                icon: 'mdi-account-circle',
+                text: 'Cecilie',
+                },
+                {
+                icon: 'mdi-account-circle',
+                text: 'Christian',
+                },
             ],
         }
     }
@@ -64,8 +85,9 @@ export default {
 
 <style lang="scss" scoped>
 
-    .tile {
-        border-radius: 5px;
+    .friend-avatar {
+        left: 50%;
+        transform: translate( -50%);
     }
 
 </style>
