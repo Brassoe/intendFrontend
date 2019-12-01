@@ -12,7 +12,7 @@
             <v-layout>
                 <v-flex xs12> 
                     <v-btn
-                    id="modal-close-btn"
+                    class="modal-close-btn"
                     text
                     x-small
                     color="error"
@@ -107,10 +107,7 @@ export default {
         margin-top: 20px;
         margin-left: 5%
     }
-    #modal-close-btn{
-        margin-top: 1%;
-        left: 85%;
-    }
+    
 
 
 </style>

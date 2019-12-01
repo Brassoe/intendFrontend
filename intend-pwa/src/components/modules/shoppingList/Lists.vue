@@ -1,7 +1,7 @@
 <template>
 <v-container>
     <v-card flat color="transparent">
-        <v-layout row> 
+        <v-layout> 
             <v-flex xs12>
                 <v-card-actions class="justify-center mb-12">
                     <newListModal/>
@@ -16,7 +16,7 @@
         <deleteListModal :text="list.name" :index="i"/>
         <shareListModal :text="list.name"/>
         <pickColorModal :index="i"/>
-        <v-layout row>
+        <v-layout>
             <v-flex xs12>
                 <v-card-title class="justify-center">{{list.name}}</v-card-title>
             </v-flex>

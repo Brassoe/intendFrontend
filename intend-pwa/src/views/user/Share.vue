@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <Friends/>
-    <Groups/>
+    <!-- TODO Add Groups component -->
   </v-container>
 </template>
 
