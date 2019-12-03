@@ -4,7 +4,7 @@
       <!-- Header only for authenticated users -->
         <Header v-if="userIsAuthenticated"/>
       <!-- Basic router view -->
-        <router-view/>
+            <router-view/>
       <!-- Bottom toolbar -->
         <Navbar/>
     </v-content>

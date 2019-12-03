@@ -8,44 +8,57 @@
             v-on="on">
             </v-img>
         </template>
-        <v-card light>
-                <v-layout row>
-                    <v-flex xs12>
-                         <v-carousel
-                         height="150"
-                         cycle
-                         hide-delimiters>
-                            <v-carousel-item
-                            v-for="item in module.images"
-                            :key="item"
-                            :src="item"
-                            reverse-transition="fade-transition"
-                            transition="fade-transition"
-                            ></v-carousel-item>
-                        </v-carousel>
-                    </v-flex>
-                </v-layout>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-card-title class="justify-center">{{module.name}}</v-card-title>
-                    </v-flex>
-                </v-layout>
-                <v-divider></v-divider>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-card-text>
-                            {{module.description}}
-                        </v-card-text>
-                    </v-flex>
-                </v-layout>
-                <v-divider></v-divider>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <v-card-actions class="justify-center">
-                            <v-btn text color="error" @click="onUninstall">Afinstaller</v-btn>
-                        </v-card-actions>
-                    </v-flex>
-                </v-layout>
+        <v-card>
+            <v-layout>
+                <v-flex xs12> 
+                    <v-btn
+                    class="modal-close-btn"
+                    text
+                    x-small
+                    color="error"
+                    @click="dialog = false">
+                        <v-icon>mdi-close-circle-outline</v-icon>
+                    </v-btn>
+                </v-flex>
+            </v-layout>
+            <v-layout
+            class="modalModuleContainer">
+                <v-flex xs12>
+                    <div class="modal-container">
+                        <v-badge
+                        color="teal"
+                        right
+                        :overlap="false"
+                        class="modal-catalogTag">
+                        <template v-slot:badge>
+                            <v-icon>mdi-tag</v-icon>
+                        </template>
+                            <div class="title font-weight-thin">Planlægning</div>
+                        </v-badge>
+                        <div class="display-1 font-weight-light">{{module.name}}</div>
+                    </div>
+                </v-flex>
+            </v-layout>
+            <v-layout>
+                <v-flex xs12>
+                    <v-card-text>
+                        {{module.description}}
+                    </v-card-text>
+                </v-flex>
+            </v-layout>
+            <v-layout>
+                <v-flex xs12>
+                    <v-card-actions class="justify-center mt-10">
+                        <v-btn
+                        class="install-button" 
+                        fab
+                        color="error" 
+                        @click="onUninstall">
+                        <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                    </v-card-actions>
+                </v-flex>
+            </v-layout>
         </v-card>
     </v-dialog>
 </template>

@@ -1,18 +1,24 @@
 <template>
   <v-container>
-      <h1>KØLESKAAAAAAb!!!!!!!!!!!</h1>
+      <FridgeItemList/>
   </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
+import fridgeStore from '@/store/modules/fridge/fridgeStore.js'
+import FridgeItemList from '@/components/modules/fridge/FridgeItemList'
 
 export default {
   name: 'Fridge',
   components: {
+    FridgeItemList
   },
   created() {
-      console.log("hej fra fridge")
-  }
+    this.$store.registerModule('fridgeStore', fridgeStore)
+  },
+  beforeDestroy () {
+    this.$store.unregisterModule('fridgeStore')
+  },
 }
 </script>

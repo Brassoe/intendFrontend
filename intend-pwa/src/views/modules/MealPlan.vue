@@ -6,13 +6,17 @@
 
 <script>
 // @ is an alias to /src
+import mealPlanStore from '@/store/modules/mealPlan/mealPlanStore.js'
 
 export default {
   name: 'MealPlan',
   components: {
   },
   created() {
-      console.log("hej fra meal plan")
-  }
+    this.$store.registerModule('mealPlanStore', mealPlanStore)
+  },
+  beforeDestroy () {
+    this.$store.unregisterModule('mealPlanStore')
+  },
 }
 </script>

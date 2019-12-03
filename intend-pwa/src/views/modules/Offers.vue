@@ -6,13 +6,18 @@
 
 <script>
 // @ is an alias to /src
+import offersStore from '@/store/modules/offers/offersStore.js'
+
 
 export default {
   name: 'Offers',
   components: {
   },
   created() {
-      console.log("hej fra offers")
-  }
+    this.$store.registerModule('offersStore', offersStore)
+  },
+  beforeDestroy () {
+    this.$store.unregisterModule('offersStore')
+  },
 }
 </script>
