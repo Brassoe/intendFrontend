@@ -20,7 +20,7 @@
                     <v-btn
                     color="error"
                     text
-                    @click="onDeleteList(index)">
+                    @click="onDeleteList(index, listId)">
                     <v-icon>mdi-delete</v-icon>
                     Slet
                     </v-btn>
@@ -40,7 +40,8 @@
 export default {
     props: {
         text: String,
-        index: Number
+        index: Number,
+        listId: Number
     },
     data () {
         return {
@@ -48,9 +49,9 @@ export default {
         }
     },
     methods: {
-        onDeleteList(index){
+        onDeleteList(index, listId){
             //store function delete entire list 
-            this.$store.dispatch('deleteList', {index: index})
+            this.$store.dispatch('deleteList', {index: index, listId: listId})
             this.dialog = false
         }
     }

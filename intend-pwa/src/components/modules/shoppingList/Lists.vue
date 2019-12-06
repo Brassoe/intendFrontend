@@ -9,13 +9,15 @@
             </v-flex>
         </v-layout>
     </v-card>
+    <app-page-loader v-if="isLoading"/>
     <v-card
+    v-else
     v-for="(list, i) in lists" :key="i"
     class="mb-12"
     :color="list.color">
-        <deleteListModal :text="list.name" :index="i"/>
+        <deleteListModal :text="list.name" :index="i" :listId="list.id"/>
         <shareListModal :text="list.name"/>
-        <pickColorModal :index="i"/>
+        <pickColorModal :index="i" :listId="list.id"/>
         <v-layout>
             <v-flex xs12>
                 <v-card-title class="justify-center">{{list.name}}</v-card-title>
@@ -27,15 +29,15 @@
             <v-list-item-group multiple>
                 <template v-for="(item, j) in list.items">
                     <v-list-item
-                    :key="`item-${j}`"
-                    @click="flipCheck(i, j)">
-                        <template>
+                    :key="`item-${j}`" 
+                    v-touch="{left: () => sendToFridge(item)}">
+                        <template >
                             <v-list-item-content v-if="item.name != ''">
                                 <v-list-item-title v-text="item.name"></v-list-item-title>
                             </v-list-item-content>
                             <v-list-item-content v-else>
                                 <v-text-field
-                                @keydown.enter="onSaveItem(i, j)"
+                                @keydown.enter="onSaveItem(i, j, list.id)"
                                 autofocus
                                 v-model="itemName"
                                 placeholder="Indsæt navn">
@@ -44,16 +46,21 @@
                             <v-list-item-action>
                                 <v-layout row >
                                     <v-flex v-if="item.name != ''">
-                                        <v-checkbox
-                                        v-model="item.checked"
-                                        color="#10ac84"
-                                        @click="flipCheck(i, j)">
-                                        </v-checkbox>
+                                        <v-icon
+                                        v-if="!item.checked"
+                                        @click="flipCheck(i, j, item.id)">
+                                            mdi-checkbox-blank-circle-outline
+                                        </v-icon>
+                                        <v-icon
+                                        v-else
+                                        @click="flipCheck(i, j, item.id)">
+                                            mdi-checkbox-marked-circle
+                                        </v-icon>
                                     </v-flex>
                                     <v-flex ml-3>
                                         <v-icon
                                         color="error"
-                                        @click="onDeleteItem(i,j)">
+                                        @click="onDeleteItem(i,j, item.id)">
                                         mdi-delete</v-icon>
                                     </v-flex>
                                 </v-layout>
@@ -101,27 +108,33 @@ export default {
     computed: {
         lists () {
             return this.$store.getters.ShoppingLists
+        },
+        isLoading() {
+            return this.$store.getters.loading
         }
     },
     methods: {
-        flipCheck(listIndex, itemIndex) {
-            //Store function check/uncheck
-            this.$store.dispatch('flipCheck', {listIndex: listIndex, itemIndex: itemIndex})
+        flipCheck(listIndex, itemIndex, itemId) {
+            this.$store.dispatch('flipCheck', {listIndex: listIndex, itemIndex: itemIndex, itemId: itemId})
         },
         onNewItemClick(index){
             this.$store.dispatch('addTmpListItem', index)
         },
-        onSaveItem(listIndex, itemIndex) {
+        onSaveItem(listIndex, itemIndex, listId) {
             this.$store.dispatch('saveItem', {
                 itemName: this.itemName, 
                 listIndex: listIndex, 
-                itemIndex: itemIndex
+                itemIndex: itemIndex,
+                listId: listId
                 })
             this.itemName = null;
         },
-        onDeleteItem(ListIndex, itemIndex) {
-            //TODO - SEND ITEM ID 
-            this.$store.dispatch('deleteListItem', {ListIndex: ListIndex, ItemIndex: itemIndex})
+        onDeleteItem(listIndex, itemIndex, itemId) {
+            this.$store.dispatch('deleteListItem', {listIndex: listIndex, itemIndex: itemIndex, itemId: itemId})
+        },
+        sendToFridge(item) {
+            //TODO - Send to board (Rep. architecture)
+            console.log(item)
         }
     }
 }

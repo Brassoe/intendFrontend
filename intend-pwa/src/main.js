@@ -21,8 +21,7 @@ new Vue({
   store,
   render: h => h(App),
   vuetify,
-
-  created () {
+  beforeCreate () {
     firebase.initializeApp({
       apiKey: "AIzaSyBopSyO6cFLZZqqrRS75sdrqF_Ue8TFNKI",
       authDomain: "intendfrontend.firebaseapp.com",

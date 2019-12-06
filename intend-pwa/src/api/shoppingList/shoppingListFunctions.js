@@ -2,7 +2,7 @@ import axios from 'axios';
 const shoppingListfuncs = {
     getLists(UID){
         return axios
-            .get('http://localhost:8080', {
+            .get('http://localhost:8080/shopping-list', {
                 headers: {
                     uid: UID
                 }
@@ -10,15 +10,15 @@ const shoppingListfuncs = {
     },
     createList(UID, payload){
         return axios
-            .post('http://localhost:8080', payload, {
+            .post('http://localhost:8080/shopping-list', payload, {
                 headers: {
                     uid: UID
                 }
             })
     },
-    deleteList(UID, listId){
+    deleteList(UID, payload){
         return axios
-            .delete('http://localhost:8080', {
+            .delete('http://localhost:8080/shopping-list/' + payload.listId, {
                 headers: {
                     uid: UID
                 }
@@ -26,20 +26,46 @@ const shoppingListfuncs = {
     },
     addItem(UID, payload){
         return axios
-            .post('http://localhost:8080', payload, {
+            .post('http://localhost:8080/shopping-list/items', 
+            {
+                name: payload.itemName,
+                checked: false,
+                shopping_list_id: payload.listId
+            }, 
+            {
                 headers: {
                     uid: UID
                 }
             })
     },
-    deleteItem(UID, itemId, listId){
+    deleteItem(UID, payload){
         return axios
-            .delete()
+            .delete('http://localhost:8080/shopping-list/items/' + payload.itemId, {
+                headers: {
+                    uid: UID
+                }
+            })
     },
-    updateCheck(UID, itemId, listId){
+    flipCheck(UID, itemId){
         return axios
-            .put()
+            .put('http://localhost:8080/shopping-list/items/' + itemId, {}, {
+                headers: {
+                    uid: UID
+                }
+            })
     },
+    updateColor(UID, payload){
+        return axios
+        .put('http://localhost:8080/shopping-list/' + payload.listId, 
+        {
+            color: payload.color
+        },
+        {
+            headers: {
+                uid: UID
+            }
+        })
+    }
     
 
 

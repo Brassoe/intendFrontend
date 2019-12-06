@@ -7,8 +7,11 @@
 import Lists from '@/components/modules/shoppingList/Lists.vue'
 import shoppingListStore from '@/store/modules/shoppingList/shoppingListStore.js'
 export default {
-  created() {
+  beforeMount() {
     this.$store.registerModule('shoppingListStore', shoppingListStore)
+  },
+  mounted(){
+    this.$store.dispatch('getAllLists')
   },
   beforeDestroy () {
     this.$store.unregisterModule('shoppingListStore')

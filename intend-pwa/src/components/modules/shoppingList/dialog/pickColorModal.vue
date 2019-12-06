@@ -31,7 +31,7 @@
                 <v-btn
                 color="success"
                 text
-                @click="onColorChange(index)">
+                @click="onColorChange(index, listId)">
                 <v-icon>mdi-format-color-fill</v-icon>
                 Opdater
                 </v-btn>
@@ -49,7 +49,10 @@
 
 <script>
 export default {
-    props: ['index'],
+    props: {
+        index: Number,
+        listId: Number
+    },
     data () {
         return {
             dialog: false,
@@ -64,9 +67,9 @@ export default {
         }
     },
     methods: {
-        onColorChange(index){
+        onColorChange(index, listId){
             //store function delete entire list 
-            this.$store.dispatch('updateColor', {index: index, color: this.color})
+            this.$store.dispatch('updateColor', {index: index, color: this.color, listId: listId})
             this.dialog = false
         }
     }

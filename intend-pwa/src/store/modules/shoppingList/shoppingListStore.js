@@ -5,41 +5,34 @@ export default {
         lists: []
     },
     mutations: {
-        //Set all fetched lists to the list array
         setLists(state, payload) {
             state.lists = payload
         },
-        //Add list to lists array
         addList(state, payload){
             state.lists.push({
                 name: payload.name,
-                id: null,
+                id: payload.id,
                 items: [],
-                color: ''
+                color: payload.color
 
             })
         },
-        //add item to specific list
         addItem(state, payload) {
             state.lists[payload.index].items.push({
                 name: '',
-                id: null,
-                checked: false,
+                id: payload.id,
+                checked: false
             })
         },
-        //update specific item on specific list
         updateItem(state, payload) {
-            state.lists[payload.listIndex].items[payload.itemIndex].name = payload.itemName
+            state.lists[payload.index.listIndex].items.splice(payload.index.itemIndex, 1, payload.itemData)
         },
-        //flip checked prop between checked or unchecked
         updateCheck(state, payload) {
         state.lists[payload.listIndex].items[payload.itemIndex].checked ^= true
         },
-        //delete specific item on specific list 
         deleteItem(state, payload){
-            state.lists[payload.ListIndex].items.splice(payload.ItemIndex, 1)
+            state.lists[payload.listIndex].items.splice(payload.itemIndex, 1)
         },
-        //deletes an entire specific list on lists array
         deleteList(state, payload) {
             state.lists.splice([payload.index], 1)
         },
@@ -49,37 +42,84 @@ export default {
     },
     actions: {
         getAllLists({commit}){
-            //GET ALL LISTS FROM API/DB AND STORE THEM IN VARIABLE
-            commit('setLists', payload)
+            commit('setLoading', true)
+            const uid = this.getters.user.uid
+            shoppingListFunctions.getLists(uid)
+            .then(response => {
+                commit('setLists', response.data)
+                commit('setLoading', false)
+            })
+            .catch(error => {
+                console.log(error)
+                commit('setLoading', false)
+            })
         },
         addList({commit}, payload) {
-            //ADD LIST TO LOCAL LISTS
-            //TODO - ADD TO DB AND RETRIEVE OBJECT FROM API ( COTAINS ID)
-            commit('addList', payload)
+            const uid = this.getters.user.uid
+            shoppingListFunctions.createList(uid, payload)
+            .then(response => {
+                commit('addList', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         addTmpListItem({commit}, payload) {
-            //ADD TEMPORARY ITEM TO LOCAL LIST
             commit('addItem', {index: payload})
         },
-        saveItem({commit, dispatch}, payload){
-            //PUSH ITEM TO DB
-            commit('updateItem', payload)
-            dispatch('flipCheck', payload)
+        saveItem({commit}, payload){
+            const uid = this.getters.user.uid
+            shoppingListFunctions.addItem(uid, payload)
+            .then(response => {
+                const data = {
+                    itemData: response.data,
+                    index: payload
+                }
+                commit('updateItem', data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         flipCheck({commit}, payload) {
-            //PUSH CHECKED VALUE TO ITEM ON DB
-            commit('updateCheck', payload)
+            const uid = this.getters.user.uid
+            shoppingListFunctions.flipCheck(uid, payload.itemId)
+            .then(() => {
+                commit('updateCheck', payload)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         deleteListItem({commit}, payload){
-            //API CALL
-            commit('deleteItem', payload)
+            const uid = this.getters.user.uid
+            shoppingListFunctions.deleteItem(uid, payload)
+            .then(() => {
+                commit('deleteItem', payload)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         deleteList({commit}, payload){
-            //API CALL
-            commit('deleteList', payload)
+            const uid = this.getters.user.uid
+            shoppingListFunctions.deleteList(uid, payload)
+            .then(() => {
+                commit('deleteList', payload)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         updateColor({commit}, payload){
-            commit('updateColor', payload)
+            const uid = this.getters.user.uid
+            shoppingListFunctions.updateColor(uid, payload)
+            .then(() => {
+                commit('updateColor', payload)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         }
     },
     getters: {
