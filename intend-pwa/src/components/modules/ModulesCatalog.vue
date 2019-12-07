@@ -3,7 +3,8 @@
         <v-layout 
         v-for="(item, i) in moduleCatalogue"
         :key="i"
-        class="catalogItemsContainer">
+        class="catalogItemsContainer"
+        :style="'background-color: rgba('+item.color+',0.8);'">
             <v-flex xs7>
                 <div class="catalogContainer">
                     <v-badge
@@ -24,7 +25,7 @@
             <v-flex xs5>
                 <v-img
                 class="mt-8"
-                :src="item.images[0]"
+                :src="'http://localhost:8080/modules/'+item.name+'/icon.svg'"
                 height="120"
                 width="120">
                 </v-img>

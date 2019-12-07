@@ -1,15 +1,5 @@
 <template>
   <v-layout wrap>
-    <v-flex xs12>
-        <v-text-field
-        name="search"
-        placeholder="Søg"
-        @keydown.enter="yourFunction"
-        id="search"
-        type="text"
-        required>
-        </v-text-field>
-    </v-flex>
     <v-flex xs12 mb-5>
         <v-chip 
         v-for="item in fridgeItems" 

@@ -32,7 +32,7 @@
                   class="mx-1"
                   height="100"
                   width="100"
-                  :img="item.images[0]"
+                  :img="'http://localhost:8080/modules/'+item.name+'/icon.svg'"
                   router
                   :to="item.name"
                   @click="sheet = false">
