@@ -133,8 +133,11 @@ export default {
             this.$store.dispatch('deleteListItem', {listIndex: listIndex, itemIndex: itemIndex, itemId: itemId})
         },
         sendToFridge(item) {
+            console.log("Swipe!")
             //TODO - Send to board (Rep. architecture)
-            console.log(item)
+            if(item.checked == 1) {
+                console.log(item)
+            }
         }
     }
 }

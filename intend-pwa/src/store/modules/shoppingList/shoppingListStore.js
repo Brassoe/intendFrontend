@@ -28,7 +28,7 @@ export default {
             state.lists[payload.index.listIndex].items.splice(payload.index.itemIndex, 1, payload.itemData)
         },
         updateCheck(state, payload) {
-        state.lists[payload.listIndex].items[payload.itemIndex].checked ^= true
+            state.lists[payload.listIndex].items[payload.itemIndex].checked ^= true
         },
         deleteItem(state, payload){
             state.lists[payload.listIndex].items.splice(payload.itemIndex, 1)

@@ -19,9 +19,15 @@
         </v-btn>
       </v-list>
     </v-bottom-navigation>
-    <v-bottom-sheet v-model="sheet" v-if="userIsAuthenticated">
-          <v-sheet class="text-center" dark>
-            <span>Dine moduler</span>
+    <v-bottom-sheet 
+    v-model="sheet" 
+    v-if="userIsAuthenticated"
+    :scrollable="false"
+    disabled>
+          <v-sheet 
+          class="text-center" 
+          style="background-color:rgb(33,33,33,0);"
+          dark>
             <v-slide-group
               class="moduleSlider"
               multiple>
@@ -29,7 +35,7 @@
                 v-for="(item, i) in installedModules"
                 :key="i">
                   <v-card
-                  class="mx-1"
+                  class="mx-1 my-3"
                   height="100"
                   width="100"
                   :img="'http://localhost:8080/modules/'+item.name+'/icon.svg'"
@@ -39,12 +45,6 @@
                   </v-card>
                 </v-slide-item>
               </v-slide-group>
-              <v-btn
-              @click="sheet = !sheet"
-              color="error"
-              text>
-              luk
-              </v-btn>
           </v-sheet>
     </v-bottom-sheet>
   </nav>
