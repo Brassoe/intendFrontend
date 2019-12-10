@@ -11,17 +11,21 @@
             </v-btn>
         </template>
             <v-card>
+                <v-layout>
+                <v-flex xs12> 
+                    <v-btn
+                    class="modal-close-btn"
+                    text
+                    x-small
+                    color="error"
+                    @click="dialog = false">
+                        <v-icon>mdi-close-circle-outline</v-icon>
+                    </v-btn>
+                </v-flex>
+            </v-layout>
                  <v-card-text>
                     <v-container>
                         <form @submit.prevent="onCreateParent">
-                            <v-text-field
-                            name="name"
-                            placeholder="Varenavn"
-                            id="name"
-                            v-model="name"
-                            type="text"
-                            required>
-                            </v-text-field>
                             <v-chip 
                             v-for="item in categories" 
                             :key="item.id"
@@ -31,20 +35,21 @@
                             @click="category = item ">
                             {{item.name}}
                             </v-chip>
+                            <v-text-field
+                            name="name"
+                            placeholder="Varenavn"
+                            id="name"
+                            v-model="name"
+                            type="text"
+                            required>
+                            </v-text-field>
                             <v-card-actions class="justify-center">
-                            <v-btn
-                            text
-                            color="green"
-                            type="submit">
-                            <v-icon>mdi-plus</v-icon>
-                            Opret
-                            </v-btn>
-                            <v-btn
-                                color="error"
+                                <v-btn
                                 text
-                                @click="dialog = false">
-                                <v-icon>mdi-close-circle-outline</v-icon>
-                                Luk
+                                color="green"
+                                type="submit">
+                                <v-icon>mdi-plus</v-icon>
+                                Opret
                                 </v-btn>
                             </v-card-actions>
                         </form>
@@ -69,7 +74,7 @@ export default {
     },
     methods: {
         onCreateParent(){
-            this.$store.dispatch('createParent', {name: this.name, category_id: this.category.id})
+            this.$store.dispatch('createParent', {name: this.name, category_id: this.category.id, category_name: this.category.name})
             this.name = null
             this.category = null
             this.dialog = false

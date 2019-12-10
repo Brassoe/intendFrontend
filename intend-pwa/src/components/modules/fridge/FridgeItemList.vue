@@ -1,12 +1,15 @@
 <template>
   <v-layout wrap>
-    <v-flex xs12 mb-5>
-        <v-chip 
-        v-for="item in categories" 
+    <v-flex 
+    xs12 
+    mb-5 
+    v-if="fridgeItems.length != 0">
+        <v-chip
+        v-for="item in fridgeItems" 
         :key="item.id"
         class="my-1 mx-1" 
         outlined 
-        color="#fff">{{item.name}}</v-chip>
+        color="#fff">{{item.category_name}}</v-chip>
     </v-flex>
     <v-flex xs12>
         <v-card flat color="transparent">
@@ -25,26 +28,26 @@
         :key="`item-${i}`"
         class="my-5">
         <EditFridgeItem/>
-        <DeleteFridgeItem :index="i" :itemName="item.name"/>
             <v-layout wrap>
                 <v-flex xs12 mt->
-                    <v-badge class="badge-item" style="left: 50%; transform: translate(-50%);">
-                        <template v-slot:badge>
-                            <div>{{fridgeItems[i].children.length}}</div>
-                        </template>
-                        <v-card-title class="py-0 px-0 ml-4">
+                        <v-card-title class="justify-center">
                             {{item.name}}
                         </v-card-title>
-                    </v-badge>
                 </v-flex>
                 <v-flex xs12>
                     <v-card-subtitle>{{item.comment}}</v-card-subtitle>
                 </v-flex>
+            </v-layout>
+            <v-divider></v-divider>
+            <v-layout wrap>
                 <v-flex xs12>
                     <v-card-actions class="justify-center">
+                        <v-badge overlap>
+                            <template v-slot:badge>
+                                <div>{{fridgeItems[i].children.length}}</div>
+                            </template>
                         <v-btn 
                         text 
-                        fab
                         @click="onAddChild(i, item.id, item.name, item.category)">
                             <v-icon 
                             size="40"
@@ -52,13 +55,13 @@
                                 mdi-plus-circle
                             </v-icon>
                         </v-btn>
+                        </v-badge>
                     </v-card-actions>
                 </v-flex>
-            </v-layout>
-            <v-divider></v-divider>
-            <v-layout wrap>
                 <v-flex xs12>
-                    <v-list flat>
+                    <v-list 
+                    flat
+                    height="30%">
                         <v-list-item-group multiple>
                             <template v-for="(child, j) in item.children">
                                 <v-list-item
@@ -67,8 +70,8 @@
                                         <v-list-item-content>
                                             <v-list-item-title>{{item.name}}</v-list-item-title>
                                         </v-list-item-content>
-                                        <v-list-item-content v-if="child.expirationDate != null">
-                                            <v-list-item-title>Mht. {{child.expirationDate}}</v-list-item-title>
+                                        <v-list-item-content v-if="child.formatted_expiration_date != null">
+                                            <v-list-item-title>Mht. {{child.formatted_expiration_date}}</v-list-item-title>
                                         </v-list-item-content>
                                         <v-list-item-content v-else>
                                             <v-dialog
@@ -89,7 +92,7 @@
                                                 scrollable>
                                                 <v-spacer></v-spacer>
                                                 <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-                                                <v-btn text color="primary" @click="updateExpDate(date, i, j)">OK</v-btn>
+                                                <v-btn text color="primary" @click="updateExpDate(date, child.id, i, j)">OK</v-btn>
                                                 </v-date-picker>
                                             </v-dialog>
                                         </v-list-item-content>
@@ -117,13 +120,11 @@
 
 <script>
 import EditFridgeItem from './dialog/EditFridgeItem'
-import DeleteFridgeItem from './dialog/DeleteFridgeItem'
 import NewParentItemModal from './dialog/NewParentItemModal'
 
 export default {
     components: {
         EditFridgeItem,
-        DeleteFridgeItem,
         NewParentItemModal
     },
     data () {
@@ -142,22 +143,19 @@ export default {
         
     },
     methods: {
-        onItemClick(){
-            console.log("hej")
-        },
         onAddChild(listIndex, parentId) {
             this.$store.dispatch('addChild', {listIndex: listIndex, parentId: parentId})
         },
-        updateExpDate(date, listIndex, childIndex) {
+        updateExpDate(date, childId, listIndex, childIndex) {
             this.$store.dispatch('updateItemExpDate', {
                 date: date,
+                id: childId,
                 listIndex: listIndex,
                 childIndex: childIndex
             })
             this.modal = false
         },
         onDeleteChild(listIndex, childIndex, childId) {
-            console.log(listIndex, childIndex)
             this.$store.dispatch('deleteChild', {listIndex: listIndex, childIndex: childIndex, childId: childId})
         }
     }

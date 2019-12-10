@@ -17,7 +17,7 @@
                     </template>
                         <div class="title font-weight-thin">{{item.category}}</div>
                     </v-badge>
-                    <div class="display-1 font-weight-light">{{item.name}}</div>
+                    <div class="display-1 font-weight-light">{{item.display_name}}</div>
                     <div class="display-1 font-weight-thin">{{item.price}},-</div>
                     <ModulesCatalogModal :module="item"/>
                 </div>

@@ -28,6 +28,18 @@ const fridgefuncs = {
                     }
                 })
     },
+    updateExpirationDate(UID, payload){
+        return axios
+            .put('http://localhost:8080/fridge/' + payload.id, 
+                {
+                    expiration_date: payload.date
+                },
+                {
+                    headers: {
+                        uid: UID
+                    }
+                })
+    },  
     getCategories(UID){
         return axios
             .get('http://localhost:8080/fridge/categories', {

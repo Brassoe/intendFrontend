@@ -33,9 +33,9 @@
                             <template v-slot:badge>
                                 <v-icon>mdi-tag</v-icon>
                             </template>
-                                <div class="title font-weight-thin">Planlægning</div>
+                                <div class="title font-weight-thin">{{module.category}}</div>
                             </v-badge>
-                            <div class="display-1 font-weight-light">{{module.name}}</div>
+                            <div class="display-1 font-weight-light">{{module.display_name}}</div>
                             <div class="display-1 font-weight-thin">{{module.price}},-</div>
                         </div>
                     </v-flex>

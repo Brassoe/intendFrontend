@@ -10,6 +10,7 @@ export default {
     mutations: {
       setModulesCatalog(state, payload) {
         state.modulesCatalogue = payload
+        console.log(state.modulesCatalogue)
       },
       setInstalledModules(state, payload) {
         state.installedModules = payload

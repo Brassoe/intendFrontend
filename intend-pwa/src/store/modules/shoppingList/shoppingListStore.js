@@ -28,9 +28,7 @@ export default {
             state.lists[payload.index.listIndex].items.splice(payload.index.itemIndex, 1, payload.itemData)
         },
         updateCheck(state, payload) {
-            console.log(state.lists[payload.listIndex].items[payload.itemIndex].checked)
             state.lists[payload.listIndex].items[payload.itemIndex].checked ^= true
-            console.log(state.lists[payload.listIndex].items[payload.itemIndex].checked)
         },
         deleteItem(state, payload){
             state.lists[payload.listIndex].items.splice(payload.itemIndex, 1)
@@ -126,9 +124,5 @@ export default {
     },
     getters: {
         ShoppingLists: state => state.lists,
-        listItemChecked(itemIndex, listIndex) {
-            console.log(itemIndex + "and  " + listIndex)
-            //return state.lists[payload.listIndex].items[payload.itemIndex].checked
-        }
     }
 } 

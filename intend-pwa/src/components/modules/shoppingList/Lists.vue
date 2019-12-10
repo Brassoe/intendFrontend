@@ -75,7 +75,7 @@
                         <v-layout row>
                             <v-flex xs12>
                                 <v-card-title class="justify-center">
-                                    <v-icon color="#000">mdi-plus-circle-outline</v-icon>
+                                    <v-icon>mdi-plus-circle-outline</v-icon>
                                 </v-card-title>
                             </v-flex>
                         </v-layout>

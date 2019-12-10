@@ -8,6 +8,7 @@ export default {
     mutations: {
         setFridge(state, payload) {
             state.fridgeItems = payload
+            console.log(state.fridgeItems)
         },
         setCategories(state, payload) {
             state.categories = payload
@@ -19,7 +20,7 @@ export default {
             state.fridgeItems[payload.listIndex].children.push(payload.childData)
         },
         updateItemExpDate(state, payload) {
-            state.fridgeItems[payload.listIndex].children[payload.childIndex].expirationDate = payload.date
+            state.fridgeItems[payload.listIndex].children.splice(payload.childIndex, 1, payload.data)
         },
         deleteChild(state, payload){
             if(payload.childIndex == state.fridgeItems[payload.listIndex].children.length -1 && payload.childIndex == 0){
@@ -67,7 +68,8 @@ export default {
                     ],
                     amount: 2,
                     comment: null,
-                    category: payload.category_id
+                    category: payload.category_id,
+                    category_name: payload.category_name
                 }
                 commit('createParent', parent)
             })
@@ -91,7 +93,15 @@ export default {
             })
         },
         updateItemExpDate({commit}, payload) {
-            commit('updateItemExpDate', payload)
+            const uid = this.getters.user.uid
+            fridgeFunctions.updateExpirationDate(uid, payload)
+            .then(response => {
+                console.log(response.data)
+                commit('updateItemExpDate', {listIndex: payload.listIndex, childIndex: payload.childIndex, data: response.data})
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         deleteChild({commit}, payload){
             const uid = this.getters.user.uid
