@@ -14,8 +14,12 @@ export default {
   components: {
     FridgeItemList
   },
-  created() {
+  beforeMount() {
     this.$store.registerModule('fridgeStore', fridgeStore)
+  },
+  mounted(){
+    this.$store.dispatch('getFridge')
+    this.$store.dispatch('getCategories')
   },
   beforeDestroy () {
     this.$store.unregisterModule('fridgeStore')

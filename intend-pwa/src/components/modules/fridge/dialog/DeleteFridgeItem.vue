@@ -19,7 +19,7 @@
                     <v-btn
                     color="error"
                     text
-                    @click="onDeleteList(index)">
+                    @click="onDeleteParent(index)">
                     <v-icon>mdi-delete</v-icon>
                     Slet
                     </v-btn>
@@ -47,8 +47,9 @@ export default {
         }
     },
     methods: {
-        onDeleteList(index){
-            //store function delete fridge item
+        onDeleteParent(index){
+            this.$store.dispatch('deleteParent', index)
+            this.dialog = false
             
         }
     }

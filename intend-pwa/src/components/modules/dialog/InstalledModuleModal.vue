@@ -2,9 +2,10 @@
     <v-dialog v-model="dialog" width="100%" >
         <template v-slot:activator="{ on }">
             <v-img
-            :src="module.images[0]"
-            height="100"
-            class="text-right pa-2"
+            :src="'http://localhost:8080/modules/'+module.name+'/icon.svg'"
+            height="120"
+            width="120"
+            style="left: 50%; transform: translate(-50%);"
             v-on="on">
             </v-img>
         </template>
