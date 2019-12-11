@@ -1,8 +1,9 @@
 import axios from 'axios';
+const route = 'http://localhost:8080/fridge/'
 const fridgefuncs = {
     getFridge(UID) {
         return axios
-            .get('http://localhost:8080/fridge', {
+            .get(route, {
                 headers: {
                     uid: UID
                 }
@@ -10,7 +11,7 @@ const fridgefuncs = {
     },
     createParent(UID, payload) {
         return axios
-            .post('http://localhost:8080/fridge', payload, {
+            .post(route, payload, {
                 headers: {
                     uid: UID
                 }
@@ -18,7 +19,7 @@ const fridgefuncs = {
     },
     createChild(UID, payload){
         return axios
-            .post('http://localhost:8080/fridge', 
+            .post(route, 
                 {
                     fridge_item_parent_id: payload.parentId
                 },
@@ -30,7 +31,7 @@ const fridgefuncs = {
     },
     updateExpirationDate(UID, payload){
         return axios
-            .put('http://localhost:8080/fridge/' + payload.id, 
+            .put(route + payload.id, 
                 {
                     expiration_date: payload.date
                 },
@@ -42,16 +43,15 @@ const fridgefuncs = {
     },  
     getCategories(UID){
         return axios
-            .get('http://localhost:8080/fridge/categories', {
+            .get(route + 'categories', {
                 headers: {
                     uid: UID
                 }
             })
     },
     deleteChild(UID, childId) {
-        console.log(childId)
         return axios
-            .delete('http://localhost:8080/fridge/' + childId, {
+            .delete(route + childId, {
                 headers: {
                     uid: UID
                 }

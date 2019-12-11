@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container px-0>
     <v-card flat color="transparent">
         <v-layout> 
             <v-flex xs12>

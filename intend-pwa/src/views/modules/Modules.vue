@@ -1,7 +1,5 @@
 <template>
-  <v-container>
       <ModulesCatalog/>
-  </v-container>
 </template>
 
 <script>

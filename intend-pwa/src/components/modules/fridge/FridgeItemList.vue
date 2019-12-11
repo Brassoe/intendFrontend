@@ -1,16 +1,5 @@
 <template>
   <v-layout wrap>
-    <v-flex 
-    xs12 
-    mb-5 
-    v-if="fridgeItems.length != 0">
-        <v-chip
-        v-for="item in fridgeItems" 
-        :key="item.id"
-        class="my-1 mx-1" 
-        outlined 
-        color="#fff">{{item.category_name}}</v-chip>
-    </v-flex>
     <v-flex xs12>
         <v-card flat color="transparent">
         <v-layout> 
@@ -22,23 +11,42 @@
         </v-layout>
     </v-card>
     </v-flex>
+    <v-flex 
+    xs12 
+    my-5
+    mx-3 
+    v-if="fridgeItems.length != 0">
+        <v-chip
+        v-for="item in fridgeCategories" 
+        :key="item.id"
+        class="my-1 mx-1"
+        outlined
+        :color="searchCategoryTags.includes(item) ? '#2ecc71' : 'fff'" 
+        @click="updateCategorySearchTag(item)">
+        {{item}}
+        </v-chip>
+    </v-flex>
     <v-flex xs12>
         <v-card
         v-for="(item, i) in fridgeItems"
         :key="`item-${i}`"
-        class="my-5">
-        <EditFridgeItem/>
+        class="my-5"
+        v-if="searchCategoryTags.includes(item.category_name) || searchCategoryTags.length == 0"
+        >
+        <AddFridgeCommentModal :comment="item.comment" :parentIndex="i"/>
             <v-layout wrap>
-                <v-flex xs12 mt->
-                        <v-card-title class="justify-center">
-                            {{item.name}}
-                        </v-card-title>
-                </v-flex>
                 <v-flex xs12>
-                    <v-card-subtitle>{{item.comment}}</v-card-subtitle>
+                    <v-chip color="success">{{item.category_name}}</v-chip>
+                    <v-card-title class="justify-center pt-0">
+                        {{item.name}}
+                    </v-card-title>
+                </v-flex>
+                <v-flex xs12 v-if="item.comment != null">
+                    <v-card-subtitle>
+                        {{item.comment}}
+                    </v-card-subtitle>
                 </v-flex>
             </v-layout>
-            <v-divider></v-divider>
             <v-layout wrap>
                 <v-flex xs12>
                     <v-card-actions class="justify-center">
@@ -60,8 +68,7 @@
                 </v-flex>
                 <v-flex xs12>
                     <v-list 
-                    flat
-                    height="30%">
+                    flat>
                         <v-list-item-group multiple>
                             <template v-for="(child, j) in item.children">
                                 <v-list-item
@@ -70,31 +77,11 @@
                                         <v-list-item-content>
                                             <v-list-item-title>{{item.name}}</v-list-item-title>
                                         </v-list-item-content>
-                                        <v-list-item-content v-if="child.formatted_expiration_date != null">
-                                            <v-list-item-title>Mht. {{child.formatted_expiration_date}}</v-list-item-title>
-                                        </v-list-item-content>
-                                        <v-list-item-content v-else>
-                                            <v-dialog
-                                                ref="dialog"
-                                                v-model="modal"
-                                                :return-value.sync="date"
-                                                persistent>
-                                                <template v-slot:activator="{ on }">
-                                                <v-text-field
-                                                    label="Vælg udløbsdato"
-                                                    readonly
-                                                    v-on="on"
-                                                ></v-text-field>
-                                                </template>
-                                                <v-date-picker 
-                                                v-model="date"
-                                                locale="da-dk"
-                                                scrollable>
-                                                <v-spacer></v-spacer>
-                                                <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-                                                <v-btn text color="primary" @click="updateExpDate(date, child.id, i, j)">OK</v-btn>
-                                                </v-date-picker>
-                                            </v-dialog>
+                                        <v-list-item-content class="py-0">
+                                            <UpdateExpDateModal
+                                            :child="child"
+                                            :listIndex="i"
+                                            :childIndex="j"/>
                                         </v-list-item-content>
                                         <v-list-item-action>
                                             <v-icon
@@ -119,18 +106,19 @@
 </template>
 
 <script>
-import EditFridgeItem from './dialog/EditFridgeItem'
+import AddFridgeCommentModal from './dialog/AddFridgeCommentModal'
 import NewParentItemModal from './dialog/NewParentItemModal'
+import UpdateExpDateModal from './dialog/UpdateExpDateModal'
 
 export default {
     components: {
-        EditFridgeItem,
-        NewParentItemModal
+        AddFridgeCommentModal,
+        NewParentItemModal,
+        UpdateExpDateModal
     },
     data () {
       return {
-        date: new Date().toISOString().substr(0, 10),
-        modal: false,
+        
       }
     },
     computed: {
@@ -139,25 +127,32 @@ export default {
         },
         categories() {
             return this.$store.getters.categories
+        },
+        fridgeCategories(){
+            const fridgeItems = this.fridgeItems
+            let fridgeCategories = []
+            fridgeItems.forEach(item => {
+                if(!fridgeCategories.includes(item.category_name)){
+                    fridgeCategories.push(item.category_name)
+                }
+            });
+            return fridgeCategories
+        },
+        searchCategoryTags() {
+            return this.$store.getters.searchCategoryTags
         }
-        
     },
     methods: {
         onAddChild(listIndex, parentId) {
             this.$store.dispatch('addChild', {listIndex: listIndex, parentId: parentId})
         },
-        updateExpDate(date, childId, listIndex, childIndex) {
-            this.$store.dispatch('updateItemExpDate', {
-                date: date,
-                id: childId,
-                listIndex: listIndex,
-                childIndex: childIndex
-            })
-            this.modal = false
-        },
         onDeleteChild(listIndex, childIndex, childId) {
             this.$store.dispatch('deleteChild', {listIndex: listIndex, childIndex: childIndex, childId: childId})
-        }
+        },
+        updateCategorySearchTag(searchTag){
+            this.$store.dispatch('updateCategorySearchTag', searchTag)
+        }       
+
     }
   }
 </script>

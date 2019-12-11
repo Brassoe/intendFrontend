@@ -16,6 +16,18 @@
             </v-btn>
         </template>
         <v-card dark>
+          <v-layout>
+              <v-flex xs12> 
+                  <v-btn
+                  class="modal-close-btn"
+                  text
+                  x-small
+                  color="error"
+                  @click="dialog = false">
+                      <v-icon>mdi-close-circle-outline</v-icon>
+                  </v-btn>
+              </v-flex>
+          </v-layout>
           <v-card-text>
             <v-container>
               <form @submit.prevent="onListCreate">
@@ -35,13 +47,6 @@
                   <v-icon>mdi-playlist-plus</v-icon>
                   Opret
                   </v-btn>
-                  <v-btn
-                    color="error"
-                    text
-                    @click="dialog = false">
-                    <v-icon>mdi-close-circle-outline</v-icon>
-                    Luk
-                    </v-btn>
                 </v-card-actions>
               </form>
             </v-container>

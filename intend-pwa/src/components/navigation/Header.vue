@@ -63,12 +63,11 @@
         </v-list-item>
         <v-divider></v-divider>
     </v-list>
-    <v-layout row>
+    <v-layout>
       <v-flex xs12>
         <v-card-actions class="justify-center">
           <v-icon text large color="#10ac84" @click="menu = false">mdi-close-circle</v-icon>
         </v-card-actions>
-
       </v-flex>
     </v-layout>
       </v-card>

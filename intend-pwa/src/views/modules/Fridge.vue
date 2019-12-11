@@ -1,7 +1,5 @@
 <template>
-  <v-container>
       <FridgeItemList/>
-  </v-container>
 </template>
 
 <script>

@@ -12,17 +12,17 @@
         </template>
             <v-card>
                 <v-layout>
-                <v-flex xs12> 
-                    <v-btn
-                    class="modal-close-btn"
-                    text
-                    x-small
-                    color="error"
-                    @click="dialog = false">
-                        <v-icon>mdi-close-circle-outline</v-icon>
-                    </v-btn>
-                </v-flex>
-            </v-layout>
+                    <v-flex xs12> 
+                        <v-btn
+                        class="modal-close-btn"
+                        text
+                        x-small
+                        color="error"
+                        @click="dialog = false">
+                            <v-icon>mdi-close-circle-outline</v-icon>
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
                  <v-card-text>
                     <v-container>
                         <form @submit.prevent="onCreateParent">
@@ -45,11 +45,11 @@
                             </v-text-field>
                             <v-card-actions class="justify-center">
                                 <v-btn
-                                text
+                                outlined
+                                rounded
                                 color="green"
                                 type="submit">
-                                <v-icon>mdi-plus</v-icon>
-                                Opret
+                                Indsæt
                                 </v-btn>
                             </v-card-actions>
                         </form>
@@ -72,11 +72,15 @@ export default {
             
         }
     },
+    watch: {
+        dialog: function() {
+            this.name = null
+            this.category = null
+        }
+    },
     methods: {
         onCreateParent(){
             this.$store.dispatch('createParent', {name: this.name, category_id: this.category.id, category_name: this.category.name})
-            this.name = null
-            this.category = null
             this.dialog = false
             
         },

@@ -1,8 +1,10 @@
 import axios from 'axios';
+
+const route = 'http://localhost:8080/shopping-list/'
 const shoppingListfuncs = {
     getLists(UID){
         return axios
-            .get('http://localhost:8080/shopping-list', {
+            .get(route, {
                 headers: {
                     uid: UID
                 }
@@ -10,7 +12,7 @@ const shoppingListfuncs = {
     },
     createList(UID, payload){
         return axios
-            .post('http://localhost:8080/shopping-list', payload, {
+            .post(route, payload, {
                 headers: {
                     uid: UID
                 }
@@ -18,7 +20,7 @@ const shoppingListfuncs = {
     },
     deleteList(UID, payload){
         return axios
-            .delete('http://localhost:8080/shopping-list/' + payload.listId, {
+            .delete(route + payload.listId, {
                 headers: {
                     uid: UID
                 }
@@ -40,7 +42,7 @@ const shoppingListfuncs = {
     },
     deleteItem(UID, payload){
         return axios
-            .delete('http://localhost:8080/shopping-list/items/' + payload.itemId, {
+            .delete(route + 'items/' + payload.itemId, {
                 headers: {
                     uid: UID
                 }
@@ -48,7 +50,7 @@ const shoppingListfuncs = {
     },
     flipCheck(UID, itemId){
         return axios
-            .put('http://localhost:8080/shopping-list/items/' + itemId, {}, {
+            .put(route + 'items/' + itemId, {}, {
                 headers: {
                     uid: UID
                 }
@@ -56,7 +58,7 @@ const shoppingListfuncs = {
     },
     updateColor(UID, payload){
         return axios
-        .put('http://localhost:8080/shopping-list/' + payload.listId, 
+        .put(route + payload.listId, 
         {
             color: payload.color
         },
