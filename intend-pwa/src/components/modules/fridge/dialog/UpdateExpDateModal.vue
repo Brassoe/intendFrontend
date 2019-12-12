@@ -1,11 +1,11 @@
 <template>
     <v-dialog v-model="dialog">
         <template v-slot:activator="{ on }">
-        <v-text-field
-        :placeholder="child.formatted_expiration_date != undefined ? 'Mht. ' + child.formatted_expiration_date : 'Indsæt udløbsdato'"
-        readonly
-        v-on="on">
-        </v-text-field>
+            <v-btn
+            text
+            v-on="on">
+                {{child.formatted_expiration_date != undefined ? 'Mht. ' + child.formatted_expiration_date : 'Indsæt udløbsdato'}}
+            </v-btn>
         </template>
         <v-date-picker 
         v-model="date"

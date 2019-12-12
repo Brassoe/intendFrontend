@@ -41,6 +41,18 @@ const fridgefuncs = {
                     }
                 })
     },  
+    updateComment(UID, payload) {
+        return axios
+            .put(route + payload.id, 
+                {
+                    comment: payload.comment
+                },
+                {
+                    headers: {
+                        uid: UID
+                    }
+                })
+    },
     getCategories(UID){
         return axios
             .get(route + 'categories', {

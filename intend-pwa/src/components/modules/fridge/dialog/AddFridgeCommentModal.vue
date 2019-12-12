@@ -58,7 +58,7 @@
 <script>
 export default {
     props: {
-        comment: String,
+        item: Object,
         parentIndex: Number
     },
     data () {
@@ -74,7 +74,11 @@ export default {
     },
     methods: {
         onUpdateComment() {
-            this.$store.dispatch('fridgeAddComment', {comment: this.updatedComment, parentIndex: this.parentIndex})
+            this.$store.dispatch('fridgeAddComment', {
+                comment: this.updatedComment,
+                id: this.item.children[0].id, 
+                parentIndex: this.parentIndex
+                })
             this.dialog = false
         }
     },

@@ -120,6 +120,10 @@ export default {
             .catch(error => {
                 console.log(error)
             })
+        },
+        postItem({}, payload){
+            const uid = this.getters.user.uid
+            shoppingListFunctions.postItem(uid, payload)
         }
     },
     getters: {

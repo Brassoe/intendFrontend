@@ -123,7 +123,14 @@ export default {
             })
         },
         fridgeAddComment({commit}, payload) {
-            commit('fridgeAddComment', payload)
+            const uid = this.getters.user.uid
+            fridgeFunctions.updateComment(uid, payload)
+            .then(() => {
+                commit('fridgeAddComment', payload)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         updateCategorySearchTag({commit}, payload) {
             commit('updateCategorySearchTag', payload)

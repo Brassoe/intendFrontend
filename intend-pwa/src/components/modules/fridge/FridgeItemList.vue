@@ -26,14 +26,14 @@
         {{item}}
         </v-chip>
     </v-flex>
-    <v-flex xs12>
+    <v-flex xs12 v-for="(item, i) in fridgeItems"
+        :key="`item-${i}`">
         <v-card
-        v-for="(item, i) in fridgeItems"
-        :key="`item-${i}`"
         class="my-5"
-        v-if="searchCategoryTags.includes(item.category_name) || searchCategoryTags.length == 0"
-        >
-        <AddFridgeCommentModal :comment="item.comment" :parentIndex="i"/>
+        v-if="
+            searchCategoryTags.includes(item.category_name) 
+            || searchCategoryTags.length == 0">
+        <AddFridgeCommentModal :item="item" :parentIndex="i"/>
             <v-layout wrap>
                 <v-flex xs12>
                     <v-chip color="success">{{item.category_name}}</v-chip>
