@@ -2,7 +2,7 @@
     <v-card 
     class="cards"
     min-width="100%">
-        <v-layout row wrap>
+        <v-layout wrap>
             <v-flex xs12>
                 <v-card-title class="justify-center">Installerede</v-card-title>
             </v-flex>
