@@ -32,7 +32,6 @@ export default {
     },
     computed: {
         installedModules() {
-            console.log(this.$store.getters.installedModules)
             return this.$store.getters.installedModules
         },
         isLoading() {

@@ -134,11 +134,14 @@ export default {
         },
         sendToFridge(listIndex, itemIndex, item) {
             //TODO - Send to board (Rep. architecture)
+            console.log(item)
             this.$store.dispatch('postItem', {
                 listIndex: listIndex,
                 itemIndex: itemIndex,
                 item: item
             })
+            console.log("POSTED ITEM")
+            this.onDeleteItem(listIndex, itemIndex, item.id)
         }
     }
 }

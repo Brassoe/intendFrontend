@@ -57,7 +57,6 @@ export default {
         )
     },
     autoSignIn({commit}, payload) {
-      console.log("AUTO SIGN IN")
       baseFunctions.userInfo(payload)
         .then(response => {
           const newUser = {

@@ -11,7 +11,6 @@ export default {
   components: {
   },
   created() {
-    console.log("Hello from home")
   }
 }
 </script>

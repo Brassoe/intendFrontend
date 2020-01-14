@@ -35,12 +35,5 @@ new Vue({
         this.$store.dispatch('getInstalledModules', {uid: user.uid, router: this.$router})
       }
     })
-    //Intercept router changes
-    
-    // router.beforeResolve((to, from, next) => {
-    //   next()
-    // }),
-    // router.afterEach((to, from) => {
-    // })
   }
 }).$mount('#app')
