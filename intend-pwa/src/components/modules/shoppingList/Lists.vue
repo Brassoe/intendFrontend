@@ -30,7 +30,7 @@
                 <template v-for="(item, j) in list.items">
                     <v-list-item
                     :key="`item-${j}`" 
-                    v-touch="{left: () => item.checked ? sendToFridge(i, j, item) : ''}">
+                    v-touch="{left: () => item.checked ? postData(i, j, item) : ''}">
                         <template>
                             <v-list-item-content v-if="item.name != ''">
                                 <v-list-item-title v-text="item.name"></v-list-item-title>
@@ -132,13 +132,12 @@ export default {
         onDeleteItem(listIndex, itemIndex, itemId) {
             this.$store.dispatch('deleteListItem', {listIndex: listIndex, itemIndex: itemIndex, itemId: itemId})
         },
-        sendToFridge(listIndex, itemIndex, item) {
-            //TODO - Send to board (Rep. architecture)
-            console.log(item)
-            this.$store.dispatch('postItem', {
+        postData(listIndex, itemIndex, item) {
+            this.$store.dispatch('postData', {
                 listIndex: listIndex,
                 itemIndex: itemIndex,
-                item: item
+                item: item,
+                dataType: 'shopping-list'
             })
             console.log("POSTED ITEM")
             this.onDeleteItem(listIndex, itemIndex, item.id)

@@ -87,6 +87,10 @@ export default {
         .catch(error => {
           console.log(error)
         })
+      },
+      postData({}, payload){
+          const uid = this.getters.user.uid
+          shoppingListFunctions.postData(uid, payload)
       }
     },
     getters: {

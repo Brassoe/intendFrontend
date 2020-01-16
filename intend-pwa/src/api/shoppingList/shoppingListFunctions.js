@@ -67,15 +67,6 @@ const shoppingListfuncs = {
                 uid: UID
             }
         })
-    },
-    postItem(UID, payload){
-        console.log(UID)
-        console.log(payload)
-        // axios.put(route, payload, {
-        //     headers: {
-        //         uid: UID
-        //     }
-        // })
     }
     
 
